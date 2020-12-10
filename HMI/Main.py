@@ -1,5 +1,5 @@
 from tkinter import *
-from rpi_ws281x import *
+from neopixel import *
 
 # LED config
 LED_COUNT = 64
@@ -46,6 +46,8 @@ def callback1():
 def callback2():
     print(1 + 1)    
     for i in range(0,64):
+        strip.setPixelColorRGB(i, 255, 0, 0)
+    for j in range(64, 128):
         strip.setPixelColorRGB(i, 255, 0, 0)
     strip.show()
 
