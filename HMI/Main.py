@@ -1,5 +1,17 @@
 from tkinter import *
+from rpi_ws281x import *
 
+# LED config
+LED_COUNT = 64
+LED_PIN = 18
+LED_FREQ_HZ = 800000
+LED_DMA = 10
+LED_BRIGHTNESS = 255
+LED_INVERT = False
+LED_CHANNEL = 0
+
+strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA , LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+strip.begin()
 
 root = Tk()  # Fenster erstellen
 root.wm_title("Raspberry Pi GUI")  # Fenster Titel
@@ -26,11 +38,16 @@ E1.grid(row=0, column=0, padx=10, pady=3)
 
 def callback1():
     print(E1.get())
+    for i in range(0,64):
+        strip.setPixelColorRGB(i, 0, 255, 255)
+    strip.show()
 
 
 def callback2():
-    print(1 + 1)
-
+    print(1 + 1)    
+    for i in range(0,64):
+        strip.setPixelColorRGB(i, 255, 0, 0)
+    strip.show()
 
 buttonFrame = Frame(rightFrame)
 buttonFrame.grid(row=1, column=0, padx=10, pady=3)
