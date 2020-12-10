@@ -14,8 +14,8 @@ leftLabel1.grid(row=0, column=0, padx=10, pady=3)
 leftLabel2 = Label(leftFrame, text="Dies ist ein Text\nmit mehreren Zeilen.")
 leftLabel2.grid(row=1, column=0, padx=10, pady=3)
 
-imageEx = PhotoImage(file='200x200')
-Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
+#imageEx = PhotoImage(file='200x200')
+#Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
 
 rightFrame = Frame(root, width=400, height=400)
 rightFrame.grid(row=0, column=1, padx=10, pady=3)
@@ -46,6 +46,3 @@ Slider.grid(row=2, column=0, padx=10, pady=3)
 
 root.mainloop()  # GUI wird upgedatet. Danach keine Elemente setzen
 
-if __name__ == "__main__":
-    # execute only if run as a script
-    main()
