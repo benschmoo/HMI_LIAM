@@ -49,6 +49,9 @@ E1.grid(row=0, column=0, padx=10, pady=3)
 
 def callback1():
     print(E1.get())
+    for i in range(0, LED_COUNT, 1):
+        strip18.setPixelColorRGB(i, 0, 0, 0)
+        strip19.setPixelColorRGB(i, 0, 0, 0)
     T = [3, 4, 11, 12, 19, 20, 27, 28, 35, 36, 43, 44, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,
           62, 63]
     H = [64, 65, 70, 71, 72, 73, 78, 79, 80, 81, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
@@ -191,10 +194,10 @@ B1.grid(row=0, column=0, padx=10, pady=3)
 B2 = Button(buttonFrame, text="Indicator Off", bg="#FFFF00", width=15, command=blinkoff)
 B2.grid(row=0, column=1, padx=10, pady=3)
 
-B3 = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, command=BlinkRight())
+B3 = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, command=BlinkRight)
 B3.grid(row=2, column=2, padx=10, pady=3)
 
-B4 = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, command=BlinkLeft())
+B4 = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, command=BlinkLeft)
 B4.grid(row=2, column=0, padx=10, pady=3)
 
 Slider = Scale(rightFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
