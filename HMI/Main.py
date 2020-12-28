@@ -20,8 +20,8 @@ strip18 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_18, LED_FREQ_HZ, LED_DMA, LED_INV
 strip18.begin()
 strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL_1)
 strip19.begin()
-BLinkArray = [0, 1, 2, 8, 9, 10, 16, 17, 18, 24, 25, 26, 32, 33, 34, 40, 41, 42, 48, 49, 50, 57, 58, 59,
-            64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 105, 106, 112, 113, 114, 120, 121, 122]
+BlinkArray1 = [5, 6 ,7, 13 , 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 47, 53, 54, 55, 61, 62, 63]
+BlinkArray2 = [64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 105, 106, 112, 113, 114, 120, 121, 122]
 Chairstate = 1 # if chair turned 180° state = 1
 
 root = Tk()  # Fenster erstellen
@@ -100,20 +100,23 @@ def callback3():
     def run():
         while (switch == True) :
             for x in range (0,10):    
-                for i in range(0,64):
+                for i in range(0,128):
                     strip18.setPixelColorRGB(i, 255, 255, 255)
-                for j in range(65, 128):
+                for j in range(0, 128):
                     strip19.setPixelColorRGB(j, 0, 255, 0)
+                
                 strip18.show()
+                strip19.show()
                 time.sleep(0.3)
 
-                for t in BLinkArray:
+                for t in BlinkArray1:
                     strip18.setPixelColorRGB(t, 20, 60, 0)
 
-                for z in BLinkArray:
+                for z in BlinkArray2:
                     strip19.setPixelColorRGB(z, 20, 60, 0)
                     
                 strip18.show()
+                strip19.show()
                 time.sleep(0.3)
                 if switch == False:
                     break
