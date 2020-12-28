@@ -16,11 +16,13 @@ LED_FREQ_HZ = 800000
 LED_DMA = 10
 LED_BRIGHTNESS = 100
 LED_INVERT = False
-LED_CHANNEL = 0
+LED_CHANNEL_0 = 0
+LED_CHANNEL_1 = 1
+
 BlinkNum= 0
-strip18 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_18, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+strip18 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_18, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL_0)
 strip18.begin()
-strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL_1)
 strip19.begin()
 
 Chairstate = 0  # if chair turned 180° state = 1
@@ -54,8 +56,8 @@ def callback1():
           62, 63]
     H = [64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 83, 84, 91, 92, 99, 100, 107, 108,
           112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127]
-    R = [1, 2, 6, 7, 9, 10, 12, 13, 17, 18, 20, 21, 25, 26, 27, 28, 33, 34, 35, 36, 37, 38, 41, 42, 45, 46,
-         49, 50, 51, 52, 53, 54, 57, 58, 59, 60, 61]
+    R = [0, 1, 5, 6, 9, 10, 13, 14, 18, 19, 21, 22, 27, 28, 39, 30, 34, 35, 36, 37, 38, 41, 42, 45, 46,
+         49, 50, 51, 52, 53, 54, 58, 59, 60, 61, 62]
     O = [66, 67, 68, 69, 73, 74, 75 ,76, 77, 78, 80, 81, 82, 85, 86, 87, 88, 89, 94, 95, 96, 97, 102, 103,
          104, 105, 106, 109, 110, 111, 113, 114, 117, 118, 122, 123, 124, 125]
     if Chairstate == 0 :
