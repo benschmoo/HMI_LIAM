@@ -18,7 +18,7 @@ LED_BRIGHTNESS = 100
 LED_INVERT = False
 LED_CHANNEL = 0
 BlinkNum= 0
-strip18 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_23, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+strip18 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_18, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 strip18.begin()
 strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
 strip19.begin()
@@ -62,20 +62,20 @@ def callback1():
         for i in T:
             strip18.setPixelColorRGB(i, 255, 255, 255)
         for j in H:
-            strip19.setPixelColorRGB(j, 255, 255, 255)
-        for k in R:
-            strip18.setPixelColorRGB(k, 255, 0, 0)
-        for l in O:
-            strip19.setPixelColorRGB(l, 255, 0, 0)
-    elif Chairstate == 1 :
-        for i in T:
-            strip19.setPixelColorRGB(i, 255, 255, 255)
-        for j in H:
             strip18.setPixelColorRGB(j, 255, 255, 255)
         for k in R:
-            strip19.setPixelColorRGB(k, 255, 0, 0)
+            strip19.setPixelColorRGB(k, 0, 255, 0)
         for l in O:
-            strip18.setPixelColorRGB(l, 255, 0, 0)
+            strip19.setPixelColorRGB(l, 0, 255, 0)
+    elif Chairstate == 1 :
+        for i in T:
+            strip19.setPixelColorRGB(i, 0, 255, 0)
+        for j in H:
+            strip19.setPixelColorRGB(j, 0, 255, 0)
+        for k in R:
+            strip18.setPixelColorRGB(k, 255, 255, 255)
+        for l in O:
+            strip18.setPixelColorRGB(l, 255, 255, 255)
     else:
         callback2()
     strip18.show()
