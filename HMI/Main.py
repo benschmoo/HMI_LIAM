@@ -8,18 +8,22 @@ GPIO.setup(23, GPIO.OUT)
 
 p = GPIO.PWM(23, 800000)
 p.start(1)
-# LED config
+# LED config für beide PWM Signale
 LED_COUNT = 128
-LED_PIN = 23
+LED_PIN_18 = 18
+LED_PIN_19 = 19
 LED_FREQ_HZ = 800000
 LED_DMA = 10
 LED_BRIGHTNESS = 100
 LED_INVERT = False
 LED_CHANNEL = 0
 BlinkNum= 0
-strip = Adafruit_NeoPixel(LED_COUNT, LED_PIN, LED_FREQ_HZ, LED_DMA , LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
-strip.begin()
+strip18 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_23, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+strip18.begin()
+strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+strip19.begin()
 
+Chairstate = 0  # if chair turned 180° state = 1
 
 root = Tk()  # Fenster erstellen
 root.wm_title("Raspberry Pi GUI")  # Fenster Titel
@@ -46,24 +50,45 @@ E1.grid(row=0, column=0, padx=10, pady=3)
 
 def callback1():
     print(E1.get())
-    TH = [3, 4, 11, 12, 19, 20, 27, 28, 35, 36, 43, 44, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,
+    T = [3, 4, 11, 12, 19, 20, 27, 28, 35, 36, 43, 44, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,
           62, 63]
-    RO = [64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 83, 84, 91, 92, 99, 100, 107, 108,
+    H = [64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 83, 84, 91, 92, 99, 100, 107, 108,
           112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127]
-    for i in TH:
-        strip.setPixelColorRGB(i, 0, 255, 255)
-    for j in RO:
-        strip.setPixelColorRGB(j, 0, 0, 255)
-    strip.show()
+    R = [1, 2, 6, 7, 9, 10, 12, 13, 17, 18, 20, 21, 25, 26, 27, 28, 33, 34, 35, 36, 37, 38, 41, 42, 45, 46,
+         49, 50, 51, 52, 53, 54, 57, 58, 59, 60, 61]
+    O = [66, 67, 68, 69, 73, 74, 75 ,76, 77, 78, 80, 81, 82, 85, 86, 87, 88, 89, 94, 95, 96, 97, 102, 103,
+         104, 105, 106, 109, 110, 111, 113, 114, 117, 118, 122, 123, 124, 125]
+    if Chairstate == 0 :
+        for i in T:
+            strip18.setPixelColorRGB(i, 255, 255, 255)
+        for j in H:
+            strip19.setPixelColorRGB(j, 255, 255, 255)
+        for k in R:
+            strip18.setPixelColorRGB(k, 255, 0, 0)
+        for l in O:
+            strip19.setPixelColorRGB(l, 255, 0, 0)
+    elif Chairstate == 1 :
+        for i in T:
+            strip19.setPixelColorRGB(i, 255, 255, 255)
+        for j in H:
+            strip18.setPixelColorRGB(j, 255, 255, 255)
+        for k in R:
+            strip19.setPixelColorRGB(k, 255, 0, 0)
+        for l in O:
+            strip18.setPixelColorRGB(l, 255, 0, 0)
+    else:
+        callback2()
+    strip18.show()
+    strip19.show()
 
 
 def callback2():
     print(1 + 1)    
     for i in range(0,64):
-        strip.setPixelColorRGB(i, 150, 150, 1500)
+        strip18.setPixelColorRGB(i, 150, 150, 1500)
     for j in range(65, 128):
-        strip.setPixelColorRGB(j, 0, 150, 0)
-    strip.show()
+        strip18.setPixelColorRGB(j, 0, 150, 0)
+    strip18.show()
     
 def scoreUp(BlinkNum):
     #BlinkNum += 1
@@ -75,22 +100,22 @@ def callback3():
         while (switch == True) :
             for x in range (0,10):    
                 for i in range(0,64):
-                    strip.setPixelColorRGB(i, 30, 30, 30)
+                    strip18.setPixelColorRGB(i, 30, 30, 30)
                 for j in range(65, 128):
-                    strip.setPixelColorRGB(j, 0, 30, 0)
-                strip.show()
+                    strip18.setPixelColorRGB(j, 0, 30, 0)
+                strip18.show()
                 time.sleep(0.3)
 
                 for i in range(0,40):
-                    strip.setPixelColorRGB(i, 30, 30, 30)
+                    strip18.setPixelColorRGB(i, 30, 30, 30)
                 for t in range(40, 64):
-                    strip.setPixelColorRGB(t, 20, 60, 0)
+                    strip18.setPixelColorRGB(t, 20, 60, 0)
                 for j in range(64,104):
-                    strip.setPixelColorRGB(j, 0, 30, 0)
+                    strip18.setPixelColorRGB(j, 0, 30, 0)
                 for z in range(104, 128):
-                    strip.setPixelColorRGB(z, 20, 60, 0)
+                    strip18.setPixelColorRGB(z, 20, 60, 0)
                     
-                strip.show()
+                strip18.show()
                 time.sleep(0.3)
                 if switch == False:
                     break
