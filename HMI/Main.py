@@ -20,7 +20,8 @@ strip18 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_18, LED_FREQ_HZ, LED_DMA, LED_INV
 strip18.begin()
 strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL_1)
 strip19.begin()
-
+BLinkArray = [0, 1, 2, 8, 9, 10, 16, 17, 18, 24, 25, 26, 32, 33, 34, 40, 41, 42, 48, 49, 50, 57, 58, 59,
+            64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 105, 106, 112, 113, 114, 120, 121, 122]
 Chairstate = 1 # if chair turned 180° state = 1
 
 root = Tk()  # Fenster erstellen
@@ -50,8 +51,8 @@ def callback1():
     print(E1.get())
     T = [3, 4, 11, 12, 19, 20, 27, 28, 35, 36, 43, 44, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,
           62, 63]
-    H = [64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 83, 84, 91, 92, 99, 100, 107, 108,
-          112, 113, 114, 115, 116, 117, 118, 119, 120, 121, 122, 123, 124, 125, 126, 127]
+    H = [64, 65, 70, 71, 72, 73, 78, 79, 80, 81, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
+         100, 101, 102, 103, 104, 105, 110, 111, 112, 113, 118, 119, 120, 121, 126, 127]
     R = [0, 1, 5, 6, 9, 10, 13, 14, 18, 19, 21, 22, 27, 28, 29, 30, 34, 35, 36, 37, 38, 41, 42, 45, 46,
          49, 50, 51, 52, 53, 54, 58, 59, 60, 61, 62]
     O = [66, 67, 68, 69, 73, 74, 75 ,76, 77, 78, 80, 81, 82, 85, 86, 87, 88, 89, 94, 95, 96, 97, 102, 103,
@@ -100,20 +101,17 @@ def callback3():
         while (switch == True) :
             for x in range (0,10):    
                 for i in range(0,64):
-                    strip18.setPixelColorRGB(i, 30, 30, 30)
+                    strip18.setPixelColorRGB(i, 255, 255, 255)
                 for j in range(65, 128):
-                    strip18.setPixelColorRGB(j, 0, 30, 0)
+                    strip19.setPixelColorRGB(j, 0, 255, 0)
                 strip18.show()
                 time.sleep(0.3)
 
-                for i in range(0,40):
-                    strip18.setPixelColorRGB(i, 30, 30, 30)
-                for t in range(40, 64):
+                for t in BLinkArray:
                     strip18.setPixelColorRGB(t, 20, 60, 0)
-                for j in range(64,104):
-                    strip18.setPixelColorRGB(j, 0, 30, 0)
-                for z in range(104, 128):
-                    strip18.setPixelColorRGB(z, 20, 60, 0)
+
+                for z in BLinkArray:
+                    strip19.setPixelColorRGB(z, 20, 60, 0)
                     
                 strip18.show()
                 time.sleep(0.3)
