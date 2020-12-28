@@ -22,7 +22,7 @@ strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INV
 strip19.begin()
 BlinkArray1 = [5, 6 ,7, 13 , 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 47, 53, 54, 55, 61, 62, 63]
 BlinkArray2 = [64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 105, 106, 112, 113, 114, 120, 121, 122]
-Chairstate = 1 # if chair turned 180° state = 1
+Chairstate = 0 # if chair turned 180° state = 1
 
 root = Tk()  # Fenster erstellen
 root.wm_title("Raspberry Pi GUI")  # Fenster Titel
