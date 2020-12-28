@@ -4,10 +4,7 @@ import RPi.GPIO as GPIO
 import time
 import threading
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(23, GPIO.OUT)
 
-p = GPIO.PWM(23, 800000)
-p.start(1)
 # LED config für beide PWM Signale
 LED_COUNT = 128
 LED_PIN_18 = 18
@@ -18,14 +15,13 @@ LED_BRIGHTNESS = 100
 LED_INVERT = False
 LED_CHANNEL_0 = 0
 LED_CHANNEL_1 = 1
-
 BlinkNum= 0
 strip18 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_18, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL_0)
 strip18.begin()
 strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL_1)
 strip19.begin()
 
-Chairstate = 0  # if chair turned 180° state = 1
+Chairstate = 1 # if chair turned 180° state = 1
 
 root = Tk()  # Fenster erstellen
 root.wm_title("Raspberry Pi GUI")  # Fenster Titel
@@ -59,7 +55,7 @@ def callback1():
     R = [0, 1, 5, 6, 9, 10, 13, 14, 18, 19, 21, 22, 27, 28, 29, 30, 34, 35, 36, 37, 38, 41, 42, 45, 46,
          49, 50, 51, 52, 53, 54, 58, 59, 60, 61, 62]
     O = [66, 67, 68, 69, 73, 74, 75 ,76, 77, 78, 80, 81, 82, 85, 86, 87, 88, 89, 94, 95, 96, 97, 102, 103,
-         104, 105, 106, 109, 110, 111, 113, 114, 117, 118, 122, 123, 124, 125]
+         104, 105, 106, 109, 110, 111, 113, 114, 115, 116, 117, 118, 122, 123, 124, 125]
     if Chairstate == 0 :
         for i in T:
             strip18.setPixelColorRGB(i, 100, 100, 100)
@@ -71,15 +67,17 @@ def callback1():
             strip19.setPixelColorRGB(l, 0, 255, 0)
     elif Chairstate == 1 :
         for i in T:
-            strip19.setPixelColorRGB(i, 0, 255, 0)
+            strip19.setPixelColorRGB(i, 255, 255, 255)
         for j in H:
-            strip19.setPixelColorRGB(j, 0, 255, 0)
+            strip19.setPixelColorRGB(j, 255, 255, 255)
         for k in R:
-            strip18.setPixelColorRGB(k, 255, 255, 255)
+            strip18.setPixelColorRGB(k, 0, 255, 0)
         for l in O:
-            strip18.setPixelColorRGB(l, 255, 255, 255)
+            strip18.setPixelColorRGB(l, 0, 255, 0)
     else:
         callback2()
+    strip18.setBrightness(20)
+    strip19.setBrightness(20)
     strip18.show()
     strip19.show()
 
