@@ -3,6 +3,7 @@ from neopixel import *
 import RPi.GPIO as GPIO
 import time
 import threading
+
 GPIO.setmode(GPIO.BCM)
 
 # LED config für beide PWM Signale
@@ -15,14 +16,14 @@ LED_BRIGHTNESS = 100
 LED_INVERT = False
 LED_CHANNEL_0 = 0
 LED_CHANNEL_1 = 1
-BlinkNum= 0
+BlinkNum = 0
 strip18 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_18, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL_0)
 strip18.begin()
 strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL_1)
 strip19.begin()
-BlinkArray1 = [5, 6 ,7, 13 , 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 47, 53, 54, 55, 61, 62, 63]
+BlinkArray1 = [5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 47, 53, 54, 55, 61, 62, 63]
 BlinkArray2 = [64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 105, 106, 112, 113, 114, 120, 121, 122]
-Chairstate = 0 # if chair turned 180° state = 1
+Chairstate = 0  # if chair turned 180° state = 1
 
 root = Tk()  # Fenster erstellen
 root.wm_title("Raspberry Pi GUI")  # Fenster Titel
@@ -37,8 +38,8 @@ leftLabel1.grid(row=0, column=0, padx=10, pady=3)
 leftLabel2 = Label(leftFrame, text="Dies ist ein Text\nmit mehreren Zeilen.")
 leftLabel2.grid(row=1, column=0, padx=10, pady=3)
 
-#imageEx = PhotoImage(file='200x200')
-#Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
+# imageEx = PhotoImage(file='200x200')
+# Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
 
 rightFrame = Frame(root, width=400, height=400)
 rightFrame.grid(row=0, column=1, padx=10, pady=3)
@@ -53,14 +54,14 @@ def callback1():
         strip18.setPixelColorRGB(i, 0, 0, 0)
         strip19.setPixelColorRGB(i, 0, 0, 0)
     T = [3, 4, 11, 12, 19, 20, 27, 28, 35, 36, 43, 44, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61,
-          62, 63]
+         62, 63]
     H = [64, 65, 70, 71, 72, 73, 78, 79, 80, 81, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99,
          100, 101, 102, 103, 104, 105, 110, 111, 112, 113, 118, 119, 120, 121, 126, 127]
     R = [0, 1, 5, 6, 9, 10, 13, 14, 18, 19, 21, 22, 27, 28, 29, 30, 34, 35, 36, 37, 38, 41, 42, 45, 46,
          49, 50, 51, 52, 53, 54, 58, 59, 60, 61, 62]
-    O = [66, 67, 68, 69, 73, 74, 75 ,76, 77, 78, 80, 81, 82, 85, 86, 87, 88, 89, 94, 95, 96, 97, 102, 103,
+    O = [66, 67, 68, 69, 73, 74, 75, 76, 77, 78, 80, 81, 82, 85, 86, 87, 88, 89, 94, 95, 96, 97, 102, 103,
          104, 105, 106, 109, 110, 111, 113, 114, 115, 116, 117, 118, 122, 123, 124, 125]
-    if Chairstate == 0 :
+    if Chairstate == 0:
         for i in T:
             strip18.setPixelColorRGB(i, 100, 100, 100)
         for j in H:
@@ -69,7 +70,7 @@ def callback1():
             strip19.setPixelColorRGB(k, 0, 255, 0)
         for l in O:
             strip19.setPixelColorRGB(l, 0, 255, 0)
-    elif Chairstate == 1 :
+    elif Chairstate == 1:
         for i in T:
             strip19.setPixelColorRGB(i, 255, 255, 255)
         for j in H:
@@ -87,23 +88,25 @@ def callback1():
 
 
 def callback2():
-    print(1 + 1)    
-    for i in range(0,64):
+    print(1 + 1)
+    for i in range(0, 64):
         strip18.setPixelColorRGB(i, 150, 150, 1500)
     for j in range(65, 128):
         strip18.setPixelColorRGB(j, 0, 150, 0)
     strip18.show()
-    
+
+
 def scoreUp(BlinkNum):
-    #BlinkNum += 1
+    # BlinkNum += 1
     print(BlinkNum)
     return BlinkNum + 1
 
+
 def callback3():
     def run():
-        while (switch == True) :
-            for x in range (0,10):    
-                for i in range(0,128):
+        while (switch == True):
+            for x in range(0, 10):
+                for i in range(0, 128):
                     strip18.setPixelColorRGB(i, 255, 255, 255)
                 for j in range(0, 128):
                     strip19.setPixelColorRGB(j, 0, 255, 0)
@@ -124,21 +127,21 @@ def callback3():
                         strip19.setPixelColorRGB(t, 20, 60, 0)
                     for z in BlinkArray2:
                         strip18.setPixelColorRGB(z, 20, 60, 0)
-                strip18.setBrightness(80)
-                strip19.setBrightness(80)
+                strip18.setBrightness(50)
+                strip19.setBrightness(50)
                 strip18.show()
                 strip19.show()
                 time.sleep(0.3)
             if switch == False:
                 break
+
     thread = threading.Thread(target=run)
     thread.start()
 
 
 def callback4():
-
     while (switch == True):
-        #for x in range(0, 10):
+        # for x in range(0, 10):
         for i in range(0, 128):
             strip18.setPixelColorRGB(i, 255, 255, 255)
         for j in range(0, 128):
@@ -160,13 +163,11 @@ def callback4():
                 strip18.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
                 strip19.setPixelColorRGB(z, 20, 60, 0)
-        strip18.setBrightness(80)
-        strip19.setBrightness(80)
+        strip18.setBrightness(50)
+        strip19.setBrightness(50)
         strip18.show()
         strip19.show()
         time.sleep(0.3)
-        if switch == False:
-            break
 
 
 def BlinkRight():
@@ -174,14 +175,46 @@ def BlinkRight():
     switch = True
     callback3()
 
+
 def BlinkLeft():
     global switch
     switch = True
-    callback4()
+    while switch:
+        # for x in range(0, 10):
+        for i in range(0, 128):
+            strip18.setPixelColorRGB(i, 255, 255, 255)
+        for j in range(0, 128):
+            strip19.setPixelColorRGB(j, 0, 255, 0)
+        strip18.setBrightness(50)
+        strip19.setBrightness(50)
+        strip18.show()
+        strip19.show()
+
+        time.sleep(0.3)
+
+        if Chairstate == 0:
+            for t in BlinkArray1:
+                strip19.setPixelColorRGB(t, 20, 60, 0)
+            for z in BlinkArray2:
+                strip18.setPixelColorRGB(z, 20, 60, 0)
+        elif Chairstate == 0:
+            for t in BlinkArray1:
+                strip18.setPixelColorRGB(t, 20, 60, 0)
+            for z in BlinkArray2:
+                strip19.setPixelColorRGB(z, 20, 60, 0)
+        strip18.setBrightness(50)
+        strip19.setBrightness(50)
+        strip18.show()
+        strip19.show()
+        time.sleep(0.3)
+        if not switch:
+            break
+
 
 def blinkoff():
     global switch
     switch = False
+
 
 buttonFrame = Frame(rightFrame)
 buttonFrame.grid(row=1, column=0, padx=10, pady=3)
@@ -202,4 +235,3 @@ Slider = Scale(rightFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, l
 Slider.grid(row=2, column=0, padx=10, pady=3)
 
 root.mainloop()  # GUI wird upgedatet. Danach keine Elemente setzen
-
