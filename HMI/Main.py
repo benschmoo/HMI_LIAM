@@ -138,33 +138,33 @@ def callback3():
 def callback4():
 
     while (switch == True):
-        for x in range(0, 10):
-            for i in range(0, 128):
-                strip18.setPixelColorRGB(i, 255, 255, 255)
-            for j in range(0, 128):
-                strip19.setPixelColorRGB(j, 0, 255, 0)
-            strip18.setBrightness(50)
-            strip19.setBrightness(50)
-            strip18.show()
-            strip19.show()
+        #for x in range(0, 10):
+        for i in range(0, 128):
+            strip18.setPixelColorRGB(i, 255, 255, 255)
+        for j in range(0, 128):
+            strip19.setPixelColorRGB(j, 0, 255, 0)
+        strip18.setBrightness(50)
+        strip19.setBrightness(50)
+        strip18.show()
+        strip19.show()
 
-            time.sleep(0.3)
+        time.sleep(0.3)
 
-            if Chairstate == 0:
-                for t in BlinkArray1:
-                    strip19.setPixelColorRGB(t, 20, 60, 0)
-                for z in BlinkArray2:
-                    strip18.setPixelColorRGB(z, 20, 60, 0)
-            elif Chairstate == 0:
-                for t in BlinkArray1:
-                    strip18.setPixelColorRGB(t, 20, 60, 0)
-                for z in BlinkArray2:
-                    strip19.setPixelColorRGB(z, 20, 60, 0)
-            strip18.setBrightness(80)
-            strip19.setBrightness(80)
-            strip18.show()
-            strip19.show()
-            time.sleep(0.3)
+        if Chairstate == 0:
+            for t in BlinkArray1:
+                strip19.setPixelColorRGB(t, 20, 60, 0)
+            for z in BlinkArray2:
+                strip18.setPixelColorRGB(z, 20, 60, 0)
+        elif Chairstate == 0:
+            for t in BlinkArray1:
+                strip18.setPixelColorRGB(t, 20, 60, 0)
+            for z in BlinkArray2:
+                strip19.setPixelColorRGB(z, 20, 60, 0)
+        strip18.setBrightness(80)
+        strip19.setBrightness(80)
+        strip18.show()
+        strip19.show()
+        time.sleep(0.3)
         if switch == False:
             break
 
