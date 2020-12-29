@@ -25,6 +25,8 @@ BlinkArray1 = [5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 
 BlinkArray2 = [64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 105, 106, 112, 113, 114, 120, 121, 122]
 Chairstate = 0  # if chair turned 180° state = 1
 
+global switch   #switch for Indicators
+
 root = Tk()  # Fenster erstellen
 root.wm_title("Raspberry Pi GUI")  # Fenster Titel
 root.config(background="#FFFFFF")  # Hintergrundfarbe des Fensters
@@ -49,6 +51,8 @@ E1.grid(row=0, column=0, padx=10, pady=3)
 
 
 def LightOFF():
+    global switch
+    switch = False
     for i in range(0, LED_COUNT, 1):
         strip18.setPixelColorRGB(i, 0, 0, 0)
         strip19.setPixelColorRGB(i, 0, 0, 0)
@@ -139,7 +143,7 @@ def BlinkRight():
                 strip18.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
                 strip19.setPixelColorRGB(z, 20, 60, 0)
-        elif Chairstate == 0:
+        elif Chairstate == 1:
             for t in BlinkArray1:
                 strip19.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
@@ -176,7 +180,7 @@ def BlinkLeft():
                 strip19.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
                 strip18.setPixelColorRGB(z, 20, 60, 0)
-        elif Chairstate == 0:
+        elif Chairstate == 1:
             for t in BlinkArray1:
                 strip18.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
@@ -186,7 +190,6 @@ def BlinkLeft():
         strip18.show()
         strip19.show()
         time.sleep(0.6)
-
 
 def WarningLight():
     global switch
@@ -222,7 +225,7 @@ def WarningLight():
         time.sleep(0.6)
 
 
-def blinkoff():
+def blinkOff():
     global switch
     switch = False
 
@@ -245,7 +248,7 @@ Warning_Lights.grid(row=1, column=1, padx=10, pady=3)
 Indicator_Left = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, command=BlinkLeft)
 Indicator_Left.grid(row=2, column=0, padx=10, pady=3)
 
-Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, command=blinkoff)
+Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, command=blinkOff)
 Indicators_OFF.grid(row=2, column=1, padx=10, pady=3)
 
 Indicator_Right = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, command=BlinkRight)
