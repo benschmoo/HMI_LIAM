@@ -52,7 +52,8 @@ def LightOFF():
     for i in range(0, LED_COUNT, 1):
         strip18.setPixelColorRGB(i, 0, 0, 0)
         strip19.setPixelColorRGB(i, 0, 0, 0)
-
+        strip18.show()
+        strip19.show()
 
 def StandingLight():
     print(E1.get())
@@ -210,9 +211,9 @@ def WarningLight():
         if Chairstate == 0:
             for t in BlinkArray1:
                 strip18.setPixelColorRGB(t, 20, 60, 0)
-                strip19.setPixelColorRGB(z, 20, 60, 0)
+                strip19.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
-                strip18.setPixelColorRGB(t, 20, 60, 0)
+                strip18.setPixelColorRGB(z, 20, 60, 0)
                 strip19.setPixelColorRGB(z, 20, 60, 0)
         strip18.setBrightness(50)
         strip19.setBrightness(50)
