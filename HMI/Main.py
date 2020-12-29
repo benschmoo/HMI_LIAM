@@ -99,7 +99,7 @@ def callback2():
 def BlinkRight():
     global switch
     switch = False  # to shutdown all other blinkers
-    time.sleep(1)
+    time.sleep(0.6)
     switch = True
     while switch:
         for i in range(0, 128):
@@ -110,7 +110,7 @@ def BlinkRight():
         strip19.setBrightness(50)
         strip18.show()
         strip19.show()
-        time.sleep(0.3)
+        time.sleep(0.6)
 
         root.update()
         if not switch:
@@ -130,13 +130,13 @@ def BlinkRight():
         strip19.setBrightness(50)
         strip18.show()
         strip19.show()
-        time.sleep(0.3)
+        time.sleep(0.6)
 
 
 def BlinkLeft():
     global switch
     switch = False  # to shutdown all other blinkers
-    time.sleep(1)
+    time.sleep(0.6)
     switch = True
     while switch:
         # for x in range(0, 10):
@@ -148,7 +148,7 @@ def BlinkLeft():
         strip19.setBrightness(50)
         strip18.show()
         strip19.show()
-        time.sleep(0.3)
+        time.sleep(0.6)
 
         root.update()
         if not switch:
@@ -168,7 +168,7 @@ def BlinkLeft():
         strip19.setBrightness(50)
         strip18.show()
         strip19.show()
-        time.sleep(0.3)
+        time.sleep(0.6)
 
 
 def blinkoff():
@@ -182,14 +182,18 @@ buttonFrame.grid(row=1, column=0, padx=10, pady=3)
 B1 = Button(buttonFrame, text="Button 1", bg="#FF0000", width=15, command=callback1)
 B1.grid(row=0, column=0, padx=10, pady=3)
 
-B2 = Button(buttonFrame, text="Indicator Off", bg="#FFFF00", width=15, command=blinkoff)
-B2.grid(row=0, column=1, padx=10, pady=3)
+Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, command = BlinkLeft & BlinkRight)
+Warning_Lights.grid(row=1, column=2, padx=10, pady=3)
 
-B3 = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, command=BlinkRight)
-B3.grid(row=2, column=2, padx=10, pady=3)
+Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, command=blinkoff)
+Indicators_OFF.grid(row=2, column=1, padx=10, pady=3)
 
-B4 = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, command=BlinkLeft)
-B4.grid(row=2, column=0, padx=10, pady=3)
+Indicator_Right = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, command=BlinkRight)
+Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
+
+Indicator_Left = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, command=BlinkLeft)
+Indicator_Left.grid(row=2, column=0, padx=10, pady=3)
+
 
 Slider = Scale(rightFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
 Slider.grid(row=2, column=0, padx=10, pady=3)
