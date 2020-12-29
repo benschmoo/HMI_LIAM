@@ -170,6 +170,38 @@ def BlinkLeft():
         strip19.show()
         time.sleep(0.6)
 
+def WarningLight():
+    global switch
+    switch = False  # to shutdown all other blinkers
+    time.sleep(0.6)
+    switch = True
+    while switch:
+        for i in range(0, 128):
+            strip18.setPixelColorRGB(i, 255, 255, 255)
+        for j in range(0, 128):
+            strip19.setPixelColorRGB(j, 0, 255, 0)
+        strip18.setBrightness(50)
+        strip19.setBrightness(50)
+        strip18.show()
+        strip19.show()
+        time.sleep(0.6)
+
+        root.update()
+        if not switch:
+            break
+
+        if Chairstate == 0:
+            for t in BlinkArray1:
+                strip18.setPixelColorRGB(t, 20, 60, 0)
+                strip19.setPixelColorRGB(z, 20, 60, 0)
+            for z in BlinkArray2:
+                strip18.setPixelColorRGB(t, 20, 60, 0)
+                strip19.setPixelColorRGB(z, 20, 60, 0)
+        strip18.setBrightness(50)
+        strip19.setBrightness(50)
+        strip18.show()
+        strip19.show()
+        time.sleep(0.6)
 
 def blinkoff():
     global switch
@@ -182,7 +214,7 @@ buttonFrame.grid(row=1, column=0, padx=10, pady=3)
 B1 = Button(buttonFrame, text="Button 1", bg="#FF0000", width=15, command=callback1)
 B1.grid(row=0, column=0, padx=10, pady=3)
 
-Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, command = BlinkLeft & BlinkRight)
+Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, command = WarningLight)
 Warning_Lights.grid(row=1, column=2, padx=10, pady=3)
 
 Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, command=blinkoff)
