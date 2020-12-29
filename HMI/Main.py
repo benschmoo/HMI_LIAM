@@ -233,25 +233,25 @@ def blinkOff():
 buttonFrame = Frame(rightFrame)
 buttonFrame.grid(row=1, column=0, padx=10, pady=3)
 
-LightOFF = Button(buttonFrame, text="OFF", bg="#FF0000", width=15, command=LightOFF)
+LightOFF = Button(buttonFrame, text="OFF", bg="#FF0000", width=15, height =10, command=LightOFF)
 LightOFF.grid(row=0, column=0, padx=10, pady=3)
 
-THRO = Button(buttonFrame, text="Standing light", bg="#FF0000", width=15, command=StandingLight)
+THRO = Button(buttonFrame, text="Standing light", bg="#FF0000", width=15, height =10, command=StandingLight)
 THRO.grid(row=0, column=1, padx=10, pady=3)
 
-LightON = Button(buttonFrame, text="LIGHT", bg="#FF0000", width=15, command=LightON)
+LightON = Button(buttonFrame, text="LIGHT", bg="#FF0000", width=15, height =10, command=LightON)
 LightON.grid(row=0, column=2, padx=10, pady=3)
 
-Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, command=WarningLight)
+Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, height =10, command=WarningLight)
 Warning_Lights.grid(row=1, column=1, padx=10, pady=3)
 
-Indicator_Left = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, command=BlinkLeft)
+Indicator_Left = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, height =10, command=BlinkLeft)
 Indicator_Left.grid(row=2, column=0, padx=10, pady=3)
 
-Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, command=blinkOff)
+Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, height =10, command=blinkOff)
 Indicators_OFF.grid(row=2, column=1, padx=10, pady=3)
 
-Indicator_Right = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, command=BlinkRight)
+Indicator_Right = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, height =10, command=BlinkRight)
 Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
 
 Slider = Scale(rightFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
