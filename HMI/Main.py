@@ -110,8 +110,11 @@ def BlinkRight():
         strip19.setBrightness(50)
         strip18.show()
         strip19.show()
-
         time.sleep(0.3)
+
+        root.update()
+        if not switch:
+            break
 
         if Chairstate == 0:
             for t in BlinkArray1:
@@ -128,9 +131,7 @@ def BlinkRight():
         strip18.show()
         strip19.show()
         time.sleep(0.3)
-        root.update()
-        if not switch:
-            break
+
 
 def BlinkLeft():
     global switch
@@ -147,8 +148,11 @@ def BlinkLeft():
         strip19.setBrightness(50)
         strip18.show()
         strip19.show()
-
         time.sleep(0.3)
+
+        root.update()
+        if not switch:
+            break
 
         if Chairstate == 0:
             for t in BlinkArray1:
@@ -165,9 +169,7 @@ def BlinkLeft():
         strip18.show()
         strip19.show()
         time.sleep(0.3)
-        root.update()
-        if not switch:
-            break
+
 
 def blinkoff():
     global switch
