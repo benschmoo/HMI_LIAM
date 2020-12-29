@@ -207,6 +207,7 @@ def BlinkLeft():
         strip18.show()
         strip19.show()
         time.sleep(0.3)
+        root.update()
         if not switch:
             break
 
