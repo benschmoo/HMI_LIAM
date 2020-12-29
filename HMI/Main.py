@@ -48,7 +48,13 @@ E1 = Entry(rightFrame, width=50)
 E1.grid(row=0, column=0, padx=10, pady=3)
 
 
-def callback1():
+def LightOFF():
+    for i in range(0, LED_COUNT, 1):
+        strip18.setPixelColorRGB(i, 0, 0, 0)
+        strip19.setPixelColorRGB(i, 0, 0, 0)
+
+
+def StandingLight():
     print(E1.get())
     for i in range(0, LED_COUNT, 1):
         strip18.setPixelColorRGB(i, 0, 0, 0)
@@ -63,7 +69,7 @@ def callback1():
          104, 105, 106, 109, 110, 111, 113, 114, 115, 116, 117, 118, 122, 123, 124, 125]
     if Chairstate == 0:
         for i in T:
-            strip18.setPixelColorRGB(i, 100, 100, 100)
+            strip18.setPixelColorRGB(i, 255, 255, 255)
         for j in H:
             strip18.setPixelColorRGB(j, 255, 255, 255)
         for k in R:
@@ -83,6 +89,17 @@ def callback1():
         callback2()
     strip18.setBrightness(20)
     strip19.setBrightness(20)
+    strip18.show()
+    strip19.show()
+
+
+def LightON():
+    for i in range(0, 128):
+        strip18.setPixelColorRGB(i, 255, 255, 255)
+    for j in range(0, 128):
+        strip19.setPixelColorRGB(j, 0, 255, 0)
+    strip18.setBrightness(50)
+    strip19.setBrightness(50)
     strip18.show()
     strip19.show()
 
@@ -139,7 +156,6 @@ def BlinkLeft():
     time.sleep(0.6)
     switch = True
     while switch:
-        # for x in range(0, 10):
         for i in range(0, 128):
             strip18.setPixelColorRGB(i, 255, 255, 255)
         for j in range(0, 128):
@@ -169,6 +185,7 @@ def BlinkLeft():
         strip18.show()
         strip19.show()
         time.sleep(0.6)
+
 
 def WarningLight():
     global switch
@@ -203,6 +220,7 @@ def WarningLight():
         strip19.show()
         time.sleep(0.6)
 
+
 def blinkoff():
     global switch
     switch = False
@@ -211,21 +229,26 @@ def blinkoff():
 buttonFrame = Frame(rightFrame)
 buttonFrame.grid(row=1, column=0, padx=10, pady=3)
 
-B1 = Button(buttonFrame, text="Button 1", bg="#FF0000", width=15, command=callback1)
-B1.grid(row=0, column=0, padx=10, pady=3)
+LightOFF = Button(buttonFrame, text="OFF", bg="#FF0000", width=15, command=LightOFF)
+LightOFF.grid(row=0, column=0, padx=10, pady=3)
 
-Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, command = WarningLight)
-Warning_Lights.grid(row=1, column=2, padx=10, pady=3)
+THRO = Button(buttonFrame, text="Standing light", bg="#FF0000", width=15, command=StandingLight)
+THRO.grid(row=0, column=1, padx=10, pady=3)
+
+LightON = Button(buttonFrame, text="LIGHT", bg="#FF0000", width=15, command=LightON)
+LightON.grid(row=0, column=2, padx=10, pady=3)
+
+Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, command=WarningLight)
+Warning_Lights.grid(row=1, column=1, padx=10, pady=3)
+
+Indicator_Left = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, command=BlinkLeft)
+Indicator_Left.grid(row=2, column=0, padx=10, pady=3)
 
 Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, command=blinkoff)
 Indicators_OFF.grid(row=2, column=1, padx=10, pady=3)
 
 Indicator_Right = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, command=BlinkRight)
 Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
-
-Indicator_Left = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, command=BlinkLeft)
-Indicator_Left.grid(row=2, column=0, padx=10, pady=3)
-
 
 Slider = Scale(rightFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
 Slider.grid(row=2, column=0, padx=10, pady=3)
