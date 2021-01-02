@@ -29,10 +29,10 @@ global switch  # switch for Indicators
 
 root = Tk()  # Fenster erstellen
 root.wm_title("LIAM'S HMI")  # Fenster Titel
-root.config(background="#FFFFFF")  # Hintrgrundfarbe des Fensters
+root.config(background="#000000")  # Hintrgrundfarbe des Fensters
 
 # Hier kommen die Elemente hin
-leftFrame = Frame(root, width=200, height=400)
+leftFrame = Frame(root, width=200, height=400, background="#000000")
 leftFrame.grid(row=0, column=0, padx=10, pady=3)
 
 
@@ -40,7 +40,7 @@ leftFrame.grid(row=0, column=0, padx=10, pady=3)
 # imageEx = PhotoImage(file='200x200')
 # Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
 
-rightFrame = Frame(root, width=400, height=400)
+rightFrame = Frame(root, width=400, height=400, background="#000000")
 rightFrame.grid(row=0, column=1, padx=10, pady=3)
 
 
@@ -256,7 +256,7 @@ LightOFF.grid(row=0, column=0, padx=10, pady=3)
 THRO = Button(buttonFrame, text="Standing light", bg="#FF0000", width=15, height=5, command=StandingLight)
 THRO.grid(row=0, column=1, padx=10, pady=3)
 
-LightON = Button(buttonFrame, text="LIGHT", bg="#FF0000", width=15, height=10, command=LightON)
+LightON = Button(buttonFrame, text="LIGHT", bg="#FF0000", width=15, height=5, command=LightON)
 LightON.grid(row=0, column=2, padx=10, pady=3)
 
 Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, height=5, command=WarningLight)
