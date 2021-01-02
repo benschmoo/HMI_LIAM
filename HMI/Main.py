@@ -24,12 +24,12 @@ strip19.begin()
 BlinkArray1 = [5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 47, 53, 54, 55, 61, 62, 63]
 BlinkArray2 = [64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 105, 106, 112, 113, 114, 120, 121, 122]
 Chairstate = 0  # if chair turned 180° state = 1
-
+global FrameDestroy
 global switch  # switch for Indicators
 
 root = Tk()  # Fenster erstellen
 root.wm_title("Raspberry Pi GUI")  # Fenster Titel
-root.config(background="#FFFFFF")  # Hintergrundfarbe des Fensters
+root.config(background="#FFFFFF")  # Hintrgrundfarbe des Fensters
 
 # Hier kommen die Elemente hin
 leftFrame = Frame(root, width=200, height=400)
@@ -52,6 +52,8 @@ TestFrame = Frame(rightFrame)
 
 for frame in (buttonFrame, TestFrame):
     frame.grid(row=1, column=0, padx=10, pady=3)
+
+
 
 #def OverviewPage ():
 def raise_frame(frame):
@@ -276,11 +278,11 @@ Slider.grid(row=2, column=0, padx=10, pady=3)
 menuFrame = Frame(leftFrame)
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
-Overview = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=10, command=lambda:raise_frame(TestFrame)).pack()
+Overview = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=10, command=lambda:(Frame.destroy(), raise_frame(TestFrame))).pack()
 #Overview.grid(row=0, column=0, padx=10, pady=3)
 Label(menuFrame).pack()
 
-Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=10, command=lambda:raise_frame(buttonFrame)).pack()
+Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=10, command=lambda:(Frame.destroy(), raise_frame(buttonFrame))).pack()
 #Lights.grid(row=1, column=0, padx=10, pady=3)
 Label(menuFrame).pack()
 
