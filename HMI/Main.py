@@ -47,11 +47,10 @@ rightFrame = Frame(root, width=400, height=400)
 rightFrame.grid(row=0, column=1, padx=10, pady=3)
 
 
-buttonFrame = Frame(root)
-TestFrame = Frame(root)
+buttonFrame = Frame(rightFrame)
+TestFrame = Frame(rightFrame)
 
 for frame in (buttonFrame, TestFrame):
-    frame(rightFrame)
     frame.grid(row=1, column=0, padx=10, pady=3)
 
 #def OverviewPage ():
@@ -278,11 +277,11 @@ menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
 Overview = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=10, command=lambda:raise_frame(TestFrame)).pack()
 #Overview.grid(row=0, column=0, padx=10, pady=3)
-Label(TestFrame, text='FRAME 1').pack()
+Label(menuFrame).pack()
 
 Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=10, command=lambda:raise_frame(buttonFrame)).pack()
 #Lights.grid(row=1, column=0, padx=10, pady=3)
-Label(buttonFrame, text='FRAME 1').pack()
+Label(menuFrame).pack()
 
-raise_frame(menuFrame)
+raise_frame(TestFrame)
 root.mainloop()  # GUI wird upgedatet. Danach keine Elemente setzen
