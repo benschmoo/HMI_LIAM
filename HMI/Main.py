@@ -28,17 +28,14 @@ global FrameDestroy
 global switch  # switch for Indicators
 
 root = Tk()  # Fenster erstellen
-root.wm_title("Raspberry Pi GUI")  # Fenster Titel
+root.wm_title("LIAM'S HMI")  # Fenster Titel
 root.config(background="#FFFFFF")  # Hintrgrundfarbe des Fensters
 
 # Hier kommen die Elemente hin
 leftFrame = Frame(root, width=200, height=400)
 leftFrame.grid(row=0, column=0, padx=10, pady=3)
 
-leftLabel1 = Label(leftFrame, text="Platzhalter Text")
-leftLabel1.grid(row=0, column=0, padx=10, pady=3)
-leftLabel2 = Label(leftFrame, text="Dies ist ein Text\nmit mehreren Zeilen.")
-leftLabel2.grid(row=1, column=0, padx=10, pady=3)
+
 
 # imageEx = PhotoImage(file='200x200')
 # Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
@@ -48,20 +45,21 @@ rightFrame.grid(row=0, column=1, padx=10, pady=3)
 
 
 buttonFrame = Frame(rightFrame)
-TestFrame = Frame(rightFrame)
+DashboardFrame = Frame(rightFrame)
+StairClimbFrame = Frame(rightFrame)
+SensorsFrame = Frame(rightFrame)
 
-for frame in (buttonFrame, TestFrame):
+
+for frame in (buttonFrame, DashboardFrame, StairClimbFrame, SensorsFrame):
     frame.grid(row=1, column=0, padx=10, pady=3)
 
-
-
-#def OverviewPage ():
 def raise_frame(frame):
     buttonFrame.grid_remove()
+    DashboardFrame.grid_remove()
+    StairClimbFrame.grid_remove()
+    SensorsFrame.grid_remove()
     time.sleep(0.5)
-    if frame == buttonFrame:
-        buttonFrame.grid()
-        
+    frame.grid()
     frame.tkraise()
 
 def LightOFF():
@@ -245,8 +243,9 @@ def blinkOff():
     global switch
     switch = False
 
-TestBTn = Button(TestFrame, text="Testomania", bg="#FFFFF0", width=15, height=10, command=LightOFF)
-TestBTn.grid(row=0, column=0, padx=10, pady=3)
+# Dashboard Frame
+TestBTN = Button(DashboardFrame, text="Testomania", bg="#FFFFF0", width=15, height=10, command=LightOFF)
+TestBTN.grid(row=0, column=0, padx=10, pady=3)
 
 # Light Buttons/Frame
 #buttonFrame = Frame(rightFrame)
@@ -273,23 +272,31 @@ Indicators_OFF.grid(row=2, column=1, padx=10, pady=3)
 Indicator_Right = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, height=5, command=BlinkRight)
 Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
 
-Slider = Scale(rightFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
+
+# Stairclimb Frame
+
+Slider = Scale(StairClimbFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
 Slider.grid(row=2, column=0, padx=10, pady=3)
 
 
+# Sensors Frame
 
 # Menubuttons
 
 menuFrame = Frame(leftFrame)
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
-Overview = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(TestFrame)).pack()
-#Overview.grid(row=0, column=0, padx=10, pady=3)
+Dashboard = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(DashboardFrame)).pack()
 Label(menuFrame).pack()
 
 Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(buttonFrame)).pack()
-#Lights.grid(row=1, column=0, padx=10, pady=3)
 Label(menuFrame).pack()
 
-raise_frame(TestFrame)
+StairClimber = Button(menuFrame, text="Stairclimber", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(StairClimbFrame)).pack()
+StairClimber(menuFrame).pack()
+
+Sensors = Button(menuFrame, text="Sensors", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(SensorsFrame)).pack()
+Sensors(menuFrame).pack()
+
+raise_frame(DashboardFrame)
 root.mainloop()  # GUI wird upgedatet. Danach keine Elemente setzen
