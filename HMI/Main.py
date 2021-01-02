@@ -46,13 +46,12 @@ leftLabel2.grid(row=1, column=0, padx=10, pady=3)
 rightFrame = Frame(root, width=400, height=400)
 rightFrame.grid(row=0, column=1, padx=10, pady=3)
 
-E1 = Entry(rightFrame, width=50)
-E1.grid(row=0, column=0, padx=10, pady=3)
 
-buttonFrame = Frame(rightFrame)
-TestFrame = Frame(rightFrame)
+buttonFrame = Frame(root)
+TestFrame = Frame(root)
 
 for frame in (buttonFrame, TestFrame):
+    frame(rightFrame)
     frame.grid(row=1, column=0, padx=10, pady=3)
 
 #def OverviewPage ():
