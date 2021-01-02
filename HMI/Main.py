@@ -238,7 +238,8 @@ def blinkOff():
     global switch
     switch = False
 
-
+TestBTn = Button(TestFrame, text="Testomania", bg="#FFFF0", width=15, height=10, command=LightOFF)
+TestBTn.grid(row=0, column=0, padx=10, pady=3)
 
 # Light Buttons/Frame
 #buttonFrame = Frame(rightFrame)
