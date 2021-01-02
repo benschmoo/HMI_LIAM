@@ -57,8 +57,11 @@ for frame in (buttonFrame, TestFrame):
 
 #def OverviewPage ():
 def raise_frame(frame):
-    frame.grid_remove()
-    time.sleep(3)
+    buttonFrame.grid_remove()
+    time.sleep(0.5)
+    if frame == buttonFrame:
+        buttonFrame.grid()
+        
     frame.tkraise()
 
 def LightOFF():
