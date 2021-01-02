@@ -49,6 +49,12 @@ rightFrame.grid(row=0, column=1, padx=10, pady=3)
 E1 = Entry(rightFrame, width=50)
 E1.grid(row=0, column=0, padx=10, pady=3)
 
+buttonFrame = Frame(rightFrame)
+TestFrame = Frame(rightFrame)
+
+for frame in (buttonFrame, TestFrame):
+    frame.grid(row=1, column=0, padx=10, pady=3)
+
 #def OverviewPage ():
 def raise_frame(frame):
     frame.tkraise()
@@ -237,8 +243,8 @@ def blinkOff():
 
 
 # Light Buttons/Frame
-buttonFrame = Frame(rightFrame)
-buttonFrame.grid(row=1, column=0, padx=10, pady=3)
+#buttonFrame = Frame(rightFrame)
+#buttonFrame.grid(row=1, column=0, padx=10, pady=3)
 
 LightOFF = Button(buttonFrame, text="OFF", bg="#FF0000", width=15, height=10, command=LightOFF)
 LightOFF.grid(row=0, column=0, padx=10, pady=3)
@@ -264,9 +270,7 @@ Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
 Slider = Scale(rightFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
 Slider.grid(row=2, column=0, padx=10, pady=3)
 
-# overview Frame
-TestFrame = Frame(rightFrame, Text = "1234")
-TestFrame.grid(row=1, column=0, padx=10, pady=3)
+
 
 # Menubuttons
 
@@ -274,11 +278,12 @@ menuFrame = Frame(leftFrame)
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
 Overview = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=10, command=lambda:raise_frame(TestFrame)).pack()
-Overview.grid(row=0, column=0, padx=10, pady=3)
+#Overview.grid(row=0, column=0, padx=10, pady=3)
+Label(TestFrame, text='FRAME 1').pack()
 
 Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=10, command=lambda:raise_frame(buttonFrame)).pack()
-Lights.grid(row=1, column=0, padx=10, pady=3)
-
+#Lights.grid(row=1, column=0, padx=10, pady=3)
+Label(buttonFrame, text='FRAME 1').pack()
 
 raise_frame(menuFrame)
 root.mainloop()  # GUI wird upgedatet. Danach keine Elemente setzen
