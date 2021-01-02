@@ -264,7 +264,7 @@ THRO.grid(row=0, column=1, padx=10, pady=3)
 LightON = Button(buttonFrame, text="LIGHT", bg="#FF0000", width=15, height=5, command=LightON)
 LightON.grid(row=0, column=2, padx=10, pady=3)
 
-Warning_Lights = Button(buttonFrame, image=WarnLight, bg="#FFF000", width=15, height=5, command=WarningLight)
+Warning_Lights = Button(buttonFrame, image=WarnLight, bg="#FFF000", pady=20, command=WarningLight)
 Warning_Lights.grid(row=1, column=1, padx=10, pady=3)
 
 Indicator_Left = Button(buttonFrame, image = IndLeft, text="Indicator Left", bg="#FFF000", pady=20, command=BlinkLeft)
@@ -277,7 +277,7 @@ Indicator_Right = Button(buttonFrame, image = IndRight, text="Indicator Right", 
 Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
 
 HornButton = Button(buttonFrame, image=Horn, bg="#FFF000", pady=20)
-HornButton.grid(row=2, column=2, padx=10, pady=3)
+HornButton.grid(row=3, column=1, padx=10, pady=3)
 
 # Stairclimb Frame
 
