@@ -73,7 +73,6 @@ def LightOFF():
 
 
 def StandingLight():
-    print(E1.get())
     for i in range(0, LED_COUNT, 1):
         strip18.setPixelColorRGB(i, 0, 0, 0)
         strip19.setPixelColorRGB(i, 0, 0, 0)
@@ -287,15 +286,21 @@ menuFrame = Frame(leftFrame)
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
 Dashboard = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(DashboardFrame)).pack()
+Dashboard.grid(row=0, column=0, padx=10, pady=3)
 Label(menuFrame).pack()
 
 Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(buttonFrame)).pack()
+Lights.grid(row=1, column=0, padx=10, pady=3)
 Label(menuFrame).pack()
 
 StairClimber = Button(menuFrame, text="Stairclimber", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(StairClimbFrame)).pack()
+StairClimber.grid(row=2, column=0, padx=10, pady=3)
+
 StairClimber(menuFrame).pack()
 
 Sensors = Button(menuFrame, text="Sensors", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(SensorsFrame)).pack()
+Sensors.grid(row=3, column=0, padx=10, pady=3)
+
 Sensors(menuFrame).pack()
 
 raise_frame(DashboardFrame)
