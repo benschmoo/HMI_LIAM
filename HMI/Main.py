@@ -38,7 +38,8 @@ leftFrame.grid(row=0, column=0, padx=10, pady=3)
 # Image import
 IndLeft = PhotoImage(file = r"/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndLeft.png")
 IndRight = PhotoImage(file = "/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndRight.png")
-
+WarnLight = PhotoImage(file = "/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Warnblinker.png")
+Horn = PhotoImage(file = "/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Horn.png")
 
 #IndLeft1 = ImageTk.PhotoImage(IndLeft1)
 # imageEx = PhotoImage(file='200x200')
@@ -263,18 +264,20 @@ THRO.grid(row=0, column=1, padx=10, pady=3)
 LightON = Button(buttonFrame, text="LIGHT", bg="#FF0000", width=15, height=5, command=LightON)
 LightON.grid(row=0, column=2, padx=10, pady=3)
 
-Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, height=5, command=WarningLight)
+Warning_Lights = Button(buttonFrame, image=WarnLight, bg="#FFF000", width=15, height=5, command=WarningLight)
 Warning_Lights.grid(row=1, column=1, padx=10, pady=3)
 
 Indicator_Left = Button(buttonFrame, image = IndLeft, text="Indicator Left", bg="#FFF000", pady=20, command=BlinkLeft)
 Indicator_Left.grid(row=2, column=0, padx=10, pady=3)
 
-Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, height=5, command=blinkOff)
+Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", pady=20, command=blinkOff)
 Indicators_OFF.grid(row=2, column=1, padx=10, pady=3)
 
 Indicator_Right = Button(buttonFrame, image = IndRight, text="Indicator Right", bg="#FFF000", pady=20, command=BlinkRight)
 Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
 
+HornButton = Button(buttonFrame, image=Horn, bg="#FFF000", pady=20)
+HornButton.grid(row=2, column=2, padx=10, pady=3)
 
 # Stairclimb Frame
 
