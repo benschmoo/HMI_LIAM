@@ -57,6 +57,8 @@ for frame in (buttonFrame, TestFrame):
 
 #def OverviewPage ():
 def raise_frame(frame):
+    frame.grid_remove()
+    time.sleep(3)
     frame.tkraise()
 
 def LightOFF():
@@ -247,25 +249,25 @@ TestBTn.grid(row=0, column=0, padx=10, pady=3)
 #buttonFrame = Frame(rightFrame)
 #buttonFrame.grid(row=1, column=0, padx=10, pady=3)
 
-LightOFF = Button(buttonFrame, text="OFF", bg="#FF0000", width=15, height=10, command=LightOFF)
+LightOFF = Button(buttonFrame, text="OFF", bg="#FF0000", width=15, height=5, command=LightOFF)
 LightOFF.grid(row=0, column=0, padx=10, pady=3)
 
-THRO = Button(buttonFrame, text="Standing light", bg="#FF0000", width=15, height=10, command=StandingLight)
+THRO = Button(buttonFrame, text="Standing light", bg="#FF0000", width=15, height=5, command=StandingLight)
 THRO.grid(row=0, column=1, padx=10, pady=3)
 
 LightON = Button(buttonFrame, text="LIGHT", bg="#FF0000", width=15, height=10, command=LightON)
 LightON.grid(row=0, column=2, padx=10, pady=3)
 
-Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, height=10, command=WarningLight)
+Warning_Lights = Button(buttonFrame, text="Warning Lights", bg="#FFF000", width=15, height=5, command=WarningLight)
 Warning_Lights.grid(row=1, column=1, padx=10, pady=3)
 
-Indicator_Left = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, height=10, command=BlinkLeft)
+Indicator_Left = Button(buttonFrame, text="Indicator Left", bg="#FFF000", width=15, height=5, command=BlinkLeft)
 Indicator_Left.grid(row=2, column=0, padx=10, pady=3)
 
-Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, height=10, command=blinkOff)
+Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", width=15, height=5, command=blinkOff)
 Indicators_OFF.grid(row=2, column=1, padx=10, pady=3)
 
-Indicator_Right = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, height=10, command=BlinkRight)
+Indicator_Right = Button(buttonFrame, text="Indicator Right", bg="#FFF000", width=15, height=5, command=BlinkRight)
 Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
 
 Slider = Scale(rightFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
@@ -278,11 +280,11 @@ Slider.grid(row=2, column=0, padx=10, pady=3)
 menuFrame = Frame(leftFrame)
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
-Overview = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=10, command=lambda:(Frame.destroy(), raise_frame(TestFrame))).pack()
+Overview = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(TestFrame)).pack()
 #Overview.grid(row=0, column=0, padx=10, pady=3)
 Label(menuFrame).pack()
 
-Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=10, command=lambda:(Frame.destroy(), raise_frame(buttonFrame))).pack()
+Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(buttonFrame)).pack()
 #Lights.grid(row=1, column=0, padx=10, pady=3)
 Label(menuFrame).pack()
 
