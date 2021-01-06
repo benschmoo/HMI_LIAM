@@ -124,7 +124,7 @@ def StandingLight():
          49, 50, 51, 52, 53, 54, 58, 59, 60, 61, 62]
     O = [66, 67, 68, 69, 73, 74, 75, 76, 77, 78, 80, 81, 82, 85, 86, 87, 88, 89, 94, 95, 96, 97, 102, 103,
          104, 105, 106, 109, 110, 111, 113, 114, 115, 116, 117, 118, 122, 123, 124, 125]
-    if Chairstate == 0:
+    if Chairstate == 1:
         for i in T:
             strip18.setPixelColorRGB(i, 255, 255, 255)
         for j in H:
@@ -133,7 +133,7 @@ def StandingLight():
             strip19.setPixelColorRGB(k, 0, 255, 0)
         for l in O:
             strip19.setPixelColorRGB(l, 0, 255, 0)
-    elif Chairstate == 1:
+    elif Chairstate == 0:
         for i in T:
             strip19.setPixelColorRGB(i, 255, 255, 255)
         for j in H:
@@ -206,12 +206,12 @@ def BlinkRight():
         if not switch:
             break
 
-        if Chairstate == 0:
+        if Chairstate == 1:
             for t in BlinkArray1:
                 strip18.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
                 strip19.setPixelColorRGB(z, 20, 60, 0)
-        elif Chairstate == 1:
+        elif Chairstate == 0:
             for t in BlinkArray1:
                 strip19.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
@@ -231,12 +231,12 @@ def BlinkLeft():
     time.sleep(0.1)
     switch = True
     while switch:
-        if Chairstate == 0:
+        if Chairstate == 1:
             for i in range(0, 128):
                 strip19.setPixelColorRGB(i, 255, 255, 255)
             for j in range(0, 128):
                 strip18.setPixelColorRGB(j, 0, 255, 0)
-        if Chairstate == 1:
+        if Chairstate == 0:
             for i in range(0, 128):
                 strip18.setPixelColorRGB(i, 255, 255, 255)
             for j in range(0, 128):
