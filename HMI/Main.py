@@ -56,6 +56,7 @@ def getChairstate():
             Chairstate = 0
             return Chairstate
     else:
+        ERROR()
         print("IOError")
 
 
@@ -152,10 +153,16 @@ def StandingLight():
 def LightON():
     global Chairstate
     getChairstate()
-    for i in range(0, 128):
-        strip18.setPixelColorRGB(i, 255, 255, 255)
-    for j in range(0, 128):
-        strip19.setPixelColorRGB(j, 0, 255, 0)
+    if Chairstate == 0:
+        for i in range(0, 128):
+            strip19.setPixelColorRGB(i, 255, 255, 255)
+        for j in range(0, 128):
+            strip18.setPixelColorRGB(j, 0, 255, 0)
+    if Chairstate == 1:
+        for i in range(0, 128):
+            strip18.setPixelColorRGB(i, 255, 255, 255)
+        for j in range(0, 128):
+            strip19.setPixelColorRGB(j, 0, 255, 0)
     strip18.setBrightness(50)
     strip19.setBrightness(50)
     strip18.show()
@@ -179,12 +186,18 @@ def BlinkRight():
     time.sleep(0.1)
     switch = True
     while switch:
-        for i in range(0, 128):
-            strip18.setPixelColorRGB(i, 255, 255, 255)
-        for j in range(0, 128):
-            strip19.setPixelColorRGB(j, 0, 255, 0)
-        strip18.setBrightness(50)
-        strip19.setBrightness(50)
+        if Chairstate == 0:
+            for i in range(0, 128):
+                strip19.setPixelColorRGB(i, 255, 255, 255)
+            for j in range(0, 128):
+                strip18.setPixelColorRGB(j, 0, 255, 0)
+        if Chairstate == 1:
+            for i in range(0, 128):
+                strip18.setPixelColorRGB(i, 255, 255, 255)
+            for j in range(0, 128):
+                strip19.setPixelColorRGB(j, 0, 255, 0)
+        strip18.setBrightness(25)
+        strip19.setBrightness(25)
         strip18.show()
         strip19.show()
         time.sleep(0.6)
@@ -203,26 +216,33 @@ def BlinkRight():
                 strip19.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
                 strip18.setPixelColorRGB(z, 20, 60, 0)
-        strip18.setBrightness(50)
-        strip19.setBrightness(50)
+        strip18.setBrightness(25)
+        strip19.setBrightness(25)
         strip18.show()
         strip19.show()
         time.sleep(0.6)
 
 
 def BlinkLeft():
+    global Chairstate
     getChairstate()
     global switch
     switch = False  # to shutdown all other blinkers
     time.sleep(0.1)
     switch = True
     while switch:
-        for i in range(0, 128):
-            strip18.setPixelColorRGB(i, 255, 255, 255)
-        for j in range(0, 128):
-            strip19.setPixelColorRGB(j, 0, 255, 0)
-        strip18.setBrightness(50)
-        strip19.setBrightness(50)
+        if Chairstate == 0:
+            for i in range(0, 128):
+                strip19.setPixelColorRGB(i, 255, 255, 255)
+            for j in range(0, 128):
+                strip18.setPixelColorRGB(j, 0, 255, 0)
+        if Chairstate == 1:
+            for i in range(0, 128):
+                strip18.setPixelColorRGB(i, 255, 255, 255)
+            for j in range(0, 128):
+                strip19.setPixelColorRGB(j, 0, 255, 0)
+        strip18.setBrightness(25)
+        strip19.setBrightness(25)
         strip18.show()
         strip19.show()
         time.sleep(0.6)
@@ -241,8 +261,8 @@ def BlinkLeft():
                 strip18.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
                 strip19.setPixelColorRGB(z, 20, 60, 0)
-        strip18.setBrightness(50)
-        strip19.setBrightness(50)
+        strip18.setBrightness(25)
+        strip19.setBrightness(25)
         strip18.show()
         strip19.show()
         time.sleep(0.6)
@@ -255,10 +275,16 @@ def WarningLight():
     time.sleep(0.1)
     switch = True
     while switch:
-        for i in range(0, 128):
-            strip18.setPixelColorRGB(i, 255, 255, 255)
-        for j in range(0, 128):
-            strip19.setPixelColorRGB(j, 0, 255, 0)
+        if Chairstate == 0:
+            for i in range(0, 128):
+                strip19.setPixelColorRGB(i, 255, 255, 255)
+            for j in range(0, 128):
+                strip18.setPixelColorRGB(j, 0, 255, 0)
+        if Chairstate == 1:
+            for i in range(0, 128):
+                strip18.setPixelColorRGB(i, 255, 255, 255)
+            for j in range(0, 128):
+                strip19.setPixelColorRGB(j, 0, 255, 0)
         strip18.setBrightness(50)
         strip19.setBrightness(50)
         strip18.show()
@@ -278,6 +304,25 @@ def WarningLight():
                 strip19.setPixelColorRGB(z, 20, 60, 0)
         strip18.setBrightness(50)
         strip19.setBrightness(50)
+        strip18.show()
+        strip19.show()
+        time.sleep(0.6)
+
+def ERROR():
+    getChairstate()
+    global switch
+    global switch
+    switch = False
+    for i in range(0, LED_COUNT, 1):
+        strip18.setPixelColorRGB(i, 0, 0, 0)
+        strip19.setPixelColorRGB(i, 0, 0, 0)
+        strip18.show()
+        strip19.show()
+        time.sleep(0.6)
+
+    for j in range(0, LED_COUNT, 1):
+        strip18.setPixelColorRGB(j, 20, 60, 0)
+        strip19.setPixelColorRGB(j, 20, 60, 0)
         strip18.show()
         strip19.show()
         time.sleep(0.6)
