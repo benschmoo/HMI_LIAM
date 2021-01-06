@@ -7,7 +7,9 @@ import bme280
 import threading
 from PIL import Image
 
-GPIO.setmode(GPIO.BCM)
+GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
+GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
+GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
 # I2c communication
 port = 1
@@ -35,9 +37,19 @@ strip19 = Adafruit_NeoPixel(LED_COUNT, LED_PIN_19, LED_FREQ_HZ, LED_DMA, LED_INV
 strip19.begin()
 BlinkArray1 = [5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 47, 53, 54, 55, 61, 62, 63]
 BlinkArray2 = [64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 105, 106, 112, 113, 114, 120, 121, 122]
-Chairstate = 0  # if chair turned 180° state = 1
 global FrameDestroy
 global switch  # switch for Indicators
+
+# Logic for Chairstate
+
+if GPIO.input(23) == GPIO.HIGH: #sensor1
+    if GPIO.input(24) == GPIO.LOW:
+        Chairstate = 1
+elif GPIO.input(24) == GPIO.HIGH: #sensor1
+    if GPIO.input(23) == GPIO.LOW:
+        Chairstate = 0
+else:
+    print("IOError")
 
 root = Tk()  # Fenster erstellen
 root.wm_title("LIAM'S HMI")  # Fenster Titel
