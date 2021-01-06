@@ -41,15 +41,15 @@ global FrameDestroy
 global switch  # switch for Indicators
 
 # Logic for Chairstate
-
-if GPIO.input(23) == GPIO.HIGH: #sensor1
-    if GPIO.input(24) == GPIO.LOW:
-        Chairstate = 1
-elif GPIO.input(24) == GPIO.HIGH: #sensor1
-    if GPIO.input(23) == GPIO.LOW:
-        Chairstate = 0
-else:
-    print("IOError")
+def getChairstate():
+    if GPIO.input(23) == GPIO.HIGH: #sensor1
+        if GPIO.input(24) == GPIO.LOW:
+            Chairstate = 1
+    elif GPIO.input(24) == GPIO.HIGH: #sensor1
+        if GPIO.input(23) == GPIO.LOW:
+            Chairstate = 0
+    else:
+        print("IOError")
 
 root = Tk()  # Fenster erstellen
 root.wm_title("LIAM'S HMI")  # Fenster Titel
@@ -102,6 +102,7 @@ def LightOFF():
 
 
 def StandingLight():
+    getChairstate()
     for i in range(0, LED_COUNT, 1):
         strip18.setPixelColorRGB(i, 0, 0, 0)
         strip19.setPixelColorRGB(i, 0, 0, 0)
@@ -140,6 +141,7 @@ def StandingLight():
 
 
 def LightON():
+    getChairstate()
     for i in range(0, 128):
         strip18.setPixelColorRGB(i, 255, 255, 255)
     for j in range(0, 128):
@@ -160,6 +162,7 @@ def callback2():
 
 
 def BlinkRight():
+    getChairstate()
     global switch
     switch = False  # to shutdown all other blinkers
     time.sleep(0.1)
@@ -197,6 +200,7 @@ def BlinkRight():
 
 
 def BlinkLeft():
+    getChairstate()
     global switch
     switch = False  # to shutdown all other blinkers
     time.sleep(0.1)
@@ -234,6 +238,7 @@ def BlinkLeft():
 
 
 def WarningLight():
+    getChairstate()
     global switch
     switch = False  # to shutdown all other blinkers
     time.sleep(0.1)
