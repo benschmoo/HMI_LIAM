@@ -7,9 +7,11 @@ import bme280
 import threading
 from PIL import Image
 
-GPIO.setmode(GPIO.BOARD) # Use physical pin numbering
-GPIO.setup(23, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
-GPIO.setup(24, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) # Set pin 10 to be an input pin and set initial value to be pulled low (off)
+GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
+GPIO.setup(23, GPIO.IN,
+           pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
+GPIO.setup(24, GPIO.IN,
+           pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
 # I2c communication
 port = 1
@@ -18,7 +20,7 @@ bus = smbus2.SMBus(port)
 calibration_params = bme280.load_calibration_params(bus, address)
 data = bme280.sample(bus, address, calibration_params)
 
-#temperature,pressure,humidity = bme280.readBME280All()
+# temperature,pressure,humidity = bme280.readBME280All()
 
 # LED config für beide PWM Signale
 LED_COUNT = 128
@@ -40,16 +42,20 @@ BlinkArray2 = [64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 
 global FrameDestroy
 global switch  # switch for Indicators
 
+
 # Logic for Chairstate
 def getChairstate():
-    if GPIO.input(23) == GPIO.HIGH: #sensor1
+    if GPIO.input(23) == GPIO.HIGH:  # sensor1
         if GPIO.input(24) == GPIO.LOW:
             Chairstate = 1
-    elif GPIO.input(24) == GPIO.HIGH: #sensor1
+            return Chairstate
+    elif GPIO.input(24) == GPIO.HIGH:  # sensor1
         if GPIO.input(23) == GPIO.LOW:
             Chairstate = 0
+            return Chairstate
     else:
         print("IOError")
+
 
 root = Tk()  # Fenster erstellen
 root.wm_title("LIAM'S HMI")  # Fenster Titel
@@ -276,12 +282,13 @@ def blinkOff():
     global switch
     switch = False
 
+
 temp = str(data.temperature)
 # Dashboard Frame
 TestBTN = Button(DashboardFrame, text="Testomania", bg="#FFFFF0", width=15, height=10, command=LightOFF)
 TestBTN.grid(row=0, column=0, padx=10, pady=3)
 
-Temperature = Label(DashboardFrame, text="Temperature: %.2f °C" % data.temperature , bg="#FFFF00")
+Temperature = Label(DashboardFrame, text="Temperature: %.2f °C" % data.temperature, bg="#FFFF00")
 Temperature.grid(row=0, column=1, padx=10, pady=3)
 
 # Light Buttons/Frame
