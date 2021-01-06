@@ -2,7 +2,7 @@ from tkinter import *
 from neopixel import *
 import RPi.GPIO as GPIO
 import time
-import smbus2
+#import smbus2
 import bme280
 import threading
 from PIL import Image
