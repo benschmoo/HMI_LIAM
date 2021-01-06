@@ -10,11 +10,13 @@ from PIL import Image
 GPIO.setmode(GPIO.BCM)
 
 # I2c communication
-port = 1
-address = 0x76
-bus = smbus2.SMBus(port)
-calibration_params = bme280.load_calibration_params(bus, address)
-data = bme280.sample(bus, address, calibration_params)
+#port = 1
+#address = 0x76
+#bus = smbus2.SMBus(port)
+#calibration_params = bme280.load_calibration_params(bus, address)
+#data = bme280.sample(bus, address, calibration_params)
+
+temperature,pressure,humidity = bme280.readBME280All()
 
 # LED config für beide PWM Signale
 LED_COUNT = 128
@@ -262,7 +264,7 @@ def blinkOff():
 TestBTN = Button(DashboardFrame, text="Testomania", bg="#FFFFF0", width=15, height=10, command=LightOFF)
 TestBTN.grid(row=0, column=0, padx=10, pady=3)
 
-Temperature = Text(DashboardFrame, text="Temperature" + data.temperature + "°", bg="000000", pady=20)
+Temperature = Text(DashboardFrame, text="Temperature" + temperature + "°", bg="000000", pady=20)
 Temperature(row=0, column=1, padx=10, pady=3)
 
 # Light Buttons/Frame
