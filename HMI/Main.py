@@ -8,9 +8,9 @@ import threading
 from PIL import Image
 
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
-GPIO.setup(23, GPIO.IN,
+GPIO.setup(16, GPIO.IN,
            pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
-GPIO.setup(24, GPIO.IN,
+GPIO.setup(18, GPIO.IN,
            pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 
 # I2c communication
@@ -41,16 +41,18 @@ BlinkArray1 = [5, 6, 7, 13, 14, 15, 21, 22, 23, 29, 30, 31, 37, 38, 39, 45, 46, 
 BlinkArray2 = [64, 65, 66, 72, 73, 74, 80, 81, 82, 88, 89, 90, 96, 97, 98, 104, 105, 106, 112, 113, 114, 120, 121, 122]
 global FrameDestroy
 global switch  # switch for Indicators
-
+global Chairstate
 
 # Logic for Chairstate
 def getChairstate():
-    if GPIO.input(23) == GPIO.HIGH:  # sensor1
-        if GPIO.input(24) == GPIO.LOW:
+    global Chairstate
+    if GPIO.input(16) == GPIO.HIGH:  # sensor1
+        if GPIO.input(18) == GPIO.LOW:
             Chairstate = 1
+            print(Chairstate)
             return Chairstate
-    elif GPIO.input(24) == GPIO.HIGH:  # sensor1
-        if GPIO.input(23) == GPIO.LOW:
+    elif GPIO.input(18) == GPIO.HIGH:  # sensor1
+        if GPIO.input(16) == GPIO.LOW:
             Chairstate = 0
             return Chairstate
     else:
@@ -108,6 +110,7 @@ def LightOFF():
 
 
 def StandingLight():
+    global Chairstate
     getChairstate()
     for i in range(0, LED_COUNT, 1):
         strip18.setPixelColorRGB(i, 0, 0, 0)
@@ -147,6 +150,7 @@ def StandingLight():
 
 
 def LightON():
+    global Chairstate
     getChairstate()
     for i in range(0, 128):
         strip18.setPixelColorRGB(i, 255, 255, 255)
@@ -168,6 +172,7 @@ def callback2():
 
 
 def BlinkRight():
+    global Chairstate
     getChairstate()
     global switch
     switch = False  # to shutdown all other blinkers
