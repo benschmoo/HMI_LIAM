@@ -2,9 +2,19 @@ from tkinter import *
 from neopixel import *
 import RPi.GPIO as GPIO
 import time
+import smbus2
+import bme280
 import threading
 from PIL import Image
+
 GPIO.setmode(GPIO.BCM)
+
+# I2c communication
+port = 1
+address = 0x76
+bus = smbus2.SMBus(port)
+calibration_params = bme280.load_calibration_params(bus, address)
+data = bme280.sample(bus, address, calibration_params)
 
 # LED config für beide PWM Signale
 LED_COUNT = 128
@@ -36,27 +46,26 @@ leftFrame = Frame(root, width=200, height=400, background="#000000")
 leftFrame.grid(row=0, column=0, padx=10, pady=3)
 
 # Image import
-IndLeft = PhotoImage(file = r"/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndLeft.png")
-IndRight = PhotoImage(file = "/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndRight.png")
-WarnLight = PhotoImage(file = "/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Warnblinker.png")
-Horn = PhotoImage(file = "/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Horn.png")
+IndLeft = PhotoImage(file=r"/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndLeft.png")
+IndRight = PhotoImage(file="/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndRight.png")
+WarnLight = PhotoImage(file="/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Warnblinker.png")
+Horn = PhotoImage(file="/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Horn.png")
 
-#IndLeft1 = ImageTk.PhotoImage(IndLeft1)
+# IndLeft1 = ImageTk.PhotoImage(IndLeft1)
 # imageEx = PhotoImage(file='200x200')
 # Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
 
 rightFrame = Frame(root, width=400, height=400, background="#000000")
 rightFrame.grid(row=0, column=1, padx=10, pady=3)
 
-
 buttonFrame = Frame(rightFrame)
 DashboardFrame = Frame(rightFrame)
 StairClimbFrame = Frame(rightFrame)
 SensorsFrame = Frame(rightFrame)
 
-
 for frame in (buttonFrame, DashboardFrame, StairClimbFrame, SensorsFrame):
     frame.grid(row=1, column=0, padx=10, pady=3)
+
 
 def raise_frame(frame):
     buttonFrame.grid_remove()
@@ -66,6 +75,7 @@ def raise_frame(frame):
     time.sleep(0.5)
     frame.grid()
     frame.tkraise()
+
 
 def LightOFF():
     global switch
@@ -138,7 +148,7 @@ def callback2():
 def BlinkRight():
     global switch
     switch = False  # to shutdown all other blinkers
-    time.sleep(0.6)
+    time.sleep(0.1)
     switch = True
     while switch:
         for i in range(0, 128):
@@ -175,7 +185,7 @@ def BlinkRight():
 def BlinkLeft():
     global switch
     switch = False  # to shutdown all other blinkers
-    time.sleep(0.6)
+    time.sleep(0.1)
     switch = True
     while switch:
         for i in range(0, 128):
@@ -212,7 +222,7 @@ def BlinkLeft():
 def WarningLight():
     global switch
     switch = False  # to shutdown all other blinkers
-    time.sleep(0.6)
+    time.sleep(0.1)
     switch = True
     while switch:
         for i in range(0, 128):
@@ -247,13 +257,17 @@ def blinkOff():
     global switch
     switch = False
 
+
 # Dashboard Frame
 TestBTN = Button(DashboardFrame, text="Testomania", bg="#FFFFF0", width=15, height=10, command=LightOFF)
 TestBTN.grid(row=0, column=0, padx=10, pady=3)
 
+Temperature = Text(DashboardFrame, text="Temperature" + data.temperature + "°", bg="000000", pady=20)
+Temperature(row=0, column=1, padx=10, pady=3)
+
 # Light Buttons/Frame
-#buttonFrame = Frame(rightFrame)
-#buttonFrame.grid(row=1, column=0, padx=10, pady=3)
+# buttonFrame = Frame(rightFrame)
+# buttonFrame.grid(row=1, column=0, padx=10, pady=3)
 
 LightOFF = Button(buttonFrame, text="OFF", bg="#FF0000", width=15, height=5, command=LightOFF)
 LightOFF.grid(row=0, column=0, padx=10, pady=3)
@@ -267,13 +281,13 @@ LightON.grid(row=0, column=2, padx=10, pady=3)
 Warning_Lights = Button(buttonFrame, image=WarnLight, bg="#FFF000", pady=20, command=WarningLight)
 Warning_Lights.grid(row=1, column=1, padx=10, pady=3)
 
-Indicator_Left = Button(buttonFrame, image = IndLeft, text="Indicator Left", bg="#FFF000", pady=20, command=BlinkLeft)
+Indicator_Left = Button(buttonFrame, image=IndLeft, text="Indicator Left", bg="#FFF000", pady=20, command=BlinkLeft)
 Indicator_Left.grid(row=2, column=0, padx=10, pady=3)
 
 Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", pady=20, command=blinkOff)
 Indicators_OFF.grid(row=2, column=1, padx=10, pady=3)
 
-Indicator_Right = Button(buttonFrame, image = IndRight, text="Indicator Right", bg="#FFF000", pady=20, command=BlinkRight)
+Indicator_Right = Button(buttonFrame, image=IndRight, text="Indicator Right", bg="#FFF000", pady=20, command=BlinkRight)
 Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
 
 HornButton = Button(buttonFrame, image=Horn, bg="#FFF000", pady=20)
@@ -284,7 +298,6 @@ HornButton.grid(row=3, column=1, padx=10, pady=3)
 Slider = Scale(StairClimbFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
 Slider.grid(row=2, column=0, padx=10, pady=3)
 
-
 # Sensors Frame
 
 # Menubuttons
@@ -292,20 +305,20 @@ Slider.grid(row=2, column=0, padx=10, pady=3)
 menuFrame = Frame(leftFrame)
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
-Dashboard = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(DashboardFrame)).pack()
-#Dashboard.grid(row=0, column=0, padx=10, pady=3)
+Dashboard = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=5,
+                   command=lambda: raise_frame(DashboardFrame)).pack()
 Label(menuFrame).pack()
 
-Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(buttonFrame)).pack()
-#Lights.grid(row=1, column=0, padx=10, pady=3)
+Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=5,
+                command=lambda: raise_frame(buttonFrame)).pack()
 Label(menuFrame).pack()
 
-StairClimber = Button(menuFrame, text="Stairclimber", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(StairClimbFrame)).pack()
-#StairClimber.grid(row=2, column=0, padx=10, pady=3)
+StairClimber = Button(menuFrame, text="Stairclimber", bg="#FF0000", width=15, height=5,
+                      command=lambda: raise_frame(StairClimbFrame)).pack()
 Label(menuFrame).pack()
 
-Sensors = Button(menuFrame, text="Sensors", bg="#FF0000", width=15, height=5, command=lambda: raise_frame(SensorsFrame)).pack()
-#Sensors.grid(row=3, column=0, padx=10, pady=3)
+Sensors = Button(menuFrame, text="Sensors", bg="#FF0000", width=15, height=5,
+                 command=lambda: raise_frame(SensorsFrame)).pack()
 Label(menuFrame).pack()
 
 raise_frame(DashboardFrame)
