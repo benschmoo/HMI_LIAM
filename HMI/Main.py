@@ -368,13 +368,13 @@ def stop_Horn(event):
 
 
 temp = str(data.temperature)
+
 # Dashboard Frame
 WheelChairIMG = Label(DashboardFrame, image=Wheelchair, bg="#FFFFFF", pady=20)
 WheelChairIMG.grid(row=0, column=0, padx=10, pady=3)
 
 Temperature = Label(DashboardFrame, text="Temperature: %.2f °C" % data.temperature, bg="#FFFF00")
 Temperature.grid(row=0, column=0, padx=10, pady=3)
-
 # Light Buttons/Frame
 # buttonFrame = Frame(rightFrame)
 # buttonFrame.grid(row=1, column=0, padx=10, pady=3)
@@ -394,7 +394,7 @@ Warning_Lights.grid(row=1, column=1, padx=5, pady=3)
 Indicator_Left = Button(buttonFrame, image=IndLeft, text="Indicator Left", bg="#FFF000", pady=30, padx=60, command=BlinkLeft)
 Indicator_Left.grid(row=2, column=0, padx=5, pady=3)
 
-Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", pady=30, padx=60, command=blinkOff)
+Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FD6A02", pady=30, padx=60, command=blinkOff)
 Indicators_OFF.grid(row=2, column=1, padx=5, pady=3)
 
 Indicator_Right = Button(buttonFrame, image=IndRight, text="Indicator Right", bg="#FFF000", pady=30, padx=60, command=BlinkRight)
@@ -405,6 +405,18 @@ HornButton.grid(row=3, column=1, padx=5, pady=3)
 HornButton.bind('<ButtonPress-1>',start_Horn)
 HornButton.bind('<ButtonRelease-1>',stop_Horn)
 # Stairclimb Frame
+
+moveOut = Button(StairClimbFrame, text="MOVE OUT", bg="#FD6A02", pady=60, padx=60)
+moveOut.grid(row=0, column=0, padx=10, pady=5)
+
+upStairs = Button(StairClimbFrame, text="UPSTAIRS", bg="#FD6A02",pady=60, padx=60)
+upStairs.grid(row=0, column=1, padx=10, pady=5)
+
+moveIn = Button(StairClimbFrame, text="MOVE IN", bg="#FD6A02", pady=60, padx=60)
+moveIn.grid(row=2, column=0, padx=10, pady=5)
+
+downStairs = Button(StairClimbFrame, text="UPSTAIRS", bg="#FD6A02",pady=60, padx=60)
+downStairs.grid(row=, column=1, padx=10, pady=5)
 
 Slider = Scale(StairClimbFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
 Slider.grid(row=2, column=0, padx=10, pady=3)
