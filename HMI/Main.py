@@ -12,7 +12,7 @@ GPIO.setup(16, GPIO.IN,
            pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 GPIO.setup(18, GPIO.IN,
            pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
-GPIO.setup(22, GPIO.OUT) # set a port/pin as an output
+GPIO.setup(31, GPIO.OUT) # set a port/pin as an output
 # I2c communication
 port = 1
 address = 0x76
@@ -340,15 +340,15 @@ def blinkOff():
     global switch
     switch = False
 
-def start_Horn():
+def start_Horn(event):
     global beeping
     beeping = True
-    GPIO.output(22,1)
+    GPIO.output(31,1)
     print("starting motor...")
 
-def stop_Horn():
+def stop_Horn(event):
     global beeping
-    GPIO.output(22,0)
+    GPIO.output(31,0)
     print("stopping motor...")
     beeping = False
 
@@ -388,8 +388,8 @@ Indicator_Right.grid(row=2, column=2, padx=5, pady=3)
 
 HornButton = Button(buttonFrame, image=Horn, bg="#FFF000", pady=30, padx=60)
 HornButton.grid(row=3, column=1, padx=5, pady=3)
-HornButton.bind('<ButtonPress-1>',start_horn)
-HornButton.bind('<ButtonRelease-1>',stop_horn)
+HornButton.bind('<ButtonPress-1>',start_Horn)
+HornButton.bind('<ButtonRelease-1>',stop_Horn)
 # Stairclimb Frame
 
 Slider = Scale(StairClimbFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
