@@ -63,6 +63,7 @@ def getChairstate():
 root = Tk()  # Fenster erstellen
 root.wm_title("LIAM'S HMI")  # Fenster Titel
 root.config(background="#000000")  # Hintrgrundfarbe des Fensters
+root.attributes('-zoomed', True)
 
 # Hier kommen die Elemente hin
 leftFrame = Frame(root, width=200, height=400, background="#000000")
