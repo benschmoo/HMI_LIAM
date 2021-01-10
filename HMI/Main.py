@@ -167,7 +167,7 @@ def StandingLight():
 def LightON():
     global Chairstate
     getChairstate()
-    LightON(bg="#000000")
+    LightON.configure(bg="yellow")
     if Chairstate == 0:
         for i in range(0, 128):
             strip19.setPixelColorRGB(i, 255, 255, 255)
@@ -266,12 +266,12 @@ def BlinkLeft():
         if not switch:
             break
 
-        if Chairstate == 0:
+        if Chairstate == 1:
             for t in BlinkArray1:
                 strip19.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
                 strip18.setPixelColorRGB(z, 20, 60, 0)
-        elif Chairstate == 1:
+        elif Chairstate == 0:
             for t in BlinkArray1:
                 strip18.setPixelColorRGB(t, 20, 60, 0)
             for z in BlinkArray2:
