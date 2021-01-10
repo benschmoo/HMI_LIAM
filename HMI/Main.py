@@ -335,7 +335,7 @@ def blinkOff():
 
 temp = str(data.temperature)
 # Dashboard Frame
-TestBTN = Button(DashboardFrame, text="Testomania", bg="#FFFFF0", width=15, height=10, command=LightOFF)
+TestBTN = Button(DashboardFrame, text="Testomania", bg="#FD6A02", width=15, height=10, command=LightOFF)
 TestBTN.grid(row=0, column=0, padx=10, pady=3)
 
 Temperature = Label(DashboardFrame, text="Temperature: %.2f °C" % data.temperature, bg="#FFFF00")
@@ -345,13 +345,13 @@ Temperature.grid(row=0, column=1, padx=10, pady=3)
 # buttonFrame = Frame(rightFrame)
 # buttonFrame.grid(row=1, column=0, padx=10, pady=3)
 
-LightOFF = Button(buttonFrame, text="OFF", bg="#FF0000", width=15, height=5, command=LightOFF)
+LightOFF = Button(buttonFrame, text="OFF", bg="#FD6A02", width=15, height=5, command=LightOFF)
 LightOFF.grid(row=0, column=0, padx=10, pady=3)
 
-THRO = Button(buttonFrame, text="Standing light", bg="#FF0000", width=15, height=5, command=StandingLight)
+THRO = Button(buttonFrame, text="Standing light", bg="#FD6A02", width=15, height=5, command=StandingLight)
 THRO.grid(row=0, column=1, padx=10, pady=3)
 
-LightON = Button(buttonFrame, text="LIGHT", bg="#FF0000", width=15, height=5, command=LightON)
+LightON = Button(buttonFrame, text="LIGHT", bg="#FD6A02", width=15, height=5, command=LightON)
 LightON.grid(row=0, column=2, padx=10, pady=3)
 
 Warning_Lights = Button(buttonFrame, image=WarnLight, bg="#FFF000", pady=20, command=WarningLight)
@@ -381,19 +381,19 @@ Slider.grid(row=2, column=0, padx=10, pady=3)
 menuFrame = Frame(leftFrame)
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
-Dashboard = Button(menuFrame, text="Overview", bg="#FF0000", width=15, height=5,
+Dashboard = Button(menuFrame, text="Overview", bg="#FD6A02", width=15, height=5,
                    command=lambda: raise_frame(DashboardFrame)).pack()
 Label(menuFrame).pack()
 
-Lights = Button(menuFrame, text="Lights", bg="#FF0000", width=15, height=5,
+Lights = Button(menuFrame, text="Lights", bg="#FD6A02", width=15, height=5,
                 command=lambda: raise_frame(buttonFrame)).pack()
 Label(menuFrame).pack()
 
-StairClimber = Button(menuFrame, text="Stairclimber", bg="#FF0000", width=15, height=5,
+StairClimber = Button(menuFrame, text="Stairclimber", bg="#FD6A02", width=15, height=5,
                       command=lambda: raise_frame(StairClimbFrame)).pack()
 Label(menuFrame).pack()
 
-Sensors = Button(menuFrame, text="Sensors", bg="#FF0000", width=15, height=5,
+Sensors = Button(menuFrame, text="Sensors", bg="#FD6A02", width=15, height=5,
                  command=lambda: raise_frame(SensorsFrame)).pack()
 Label(menuFrame).pack()
 
