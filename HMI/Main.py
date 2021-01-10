@@ -117,6 +117,9 @@ def raise_frame(frame):
 def LightOFF():
     global switch
     switch = False
+    LightOFF.configure(bg="yellow")
+    LightON.configure(bg="#FD6A02")
+    THRO.configure(bg="#FD6A02")
     for i in range(0, LED_COUNT, 1):
         strip18.setPixelColorRGB(i, 0, 0, 0)
         strip19.setPixelColorRGB(i, 0, 0, 0)
@@ -127,6 +130,9 @@ def LightOFF():
 def StandingLight():
     global Chairstate
     getChairstate()
+    LightOFF.configure(bg="#FD6A02")
+    LightON.configure(bg="#FD6A02")
+    THRO.configure(bg="yellow")
     for i in range(0, LED_COUNT, 1):
         strip18.setPixelColorRGB(i, 0, 0, 0)
         strip19.setPixelColorRGB(i, 0, 0, 0)
@@ -167,7 +173,9 @@ def StandingLight():
 def LightON():
     global Chairstate
     getChairstate()
+    LightOFF.configure(bg="#FD6A02")
     LightON.configure(bg="yellow")
+    THRO.configure(bg="#FD6A02")
     if Chairstate == 0:
         for i in range(0, 128):
             strip19.setPixelColorRGB(i, 255, 255, 255)
