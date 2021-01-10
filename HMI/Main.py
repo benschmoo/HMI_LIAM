@@ -70,7 +70,7 @@ leftFrame = Frame(root, width=200, height=400, background="#000000")
 leftFrame.grid(row=0, column=0, padx=10, pady=3)
 
 # Image import and resize using PIL
-IndLeftOrig = Image.open(r"/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndLeft.png")
+IndLeftOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndLeft.png")
 IndLeftResize = IndLeftOrig.resize((140,90), Image.ANTIALIAS)
 IndLeft = ImageTk.PhotoImage(IndLeftResize)
 IndRightOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndRight.png")
@@ -82,6 +82,10 @@ WarnLight = ImageTk.PhotoImage(WarnLightResize)
 HornOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Horn.png")
 HornResize = HornOrig.resize((130,70), Image.ANTIALIAS)
 Horn = ImageTk.PhotoImage(HornResize)
+
+WheelchairOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Wheelchair.png")
+WheelchairResize = WheelchairOrig.resize((500,500), Image.ANTIALIAS)
+Wheelchair = ImageTk.PhotoImage(WheelchairResize)
 # IndLeft1 = ImageTk.PhotoImage(IndLeft1)
 # imageEx = PhotoImage(file='200x200')
 # Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
@@ -355,8 +359,8 @@ def stop_Horn(event):
 
 temp = str(data.temperature)
 # Dashboard Frame
-TestBTN = Button(DashboardFrame, text="Testomania", bg="#FD6A02", width=15, height=10, command=LightOFF)
-TestBTN.grid(row=0, column=0, padx=10, pady=3)
+WheelChairIMG = Image(DashboardFrame, image=Wheelchair, bg="#FFFFFF", width=15, height=10)
+WheelChairIMG.grid(row=0, column=0, padx=10, pady=3)
 
 Temperature = Label(DashboardFrame, text="Temperature: %.2f °C" % data.temperature, bg="#FFFF00")
 Temperature.grid(row=0, column=1, padx=10, pady=3)
