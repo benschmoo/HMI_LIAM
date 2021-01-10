@@ -345,29 +345,29 @@ Temperature.grid(row=0, column=1, padx=10, pady=3)
 # buttonFrame = Frame(rightFrame)
 # buttonFrame.grid(row=1, column=0, padx=10, pady=3)
 
-LightOFF = Button(buttonFrame, text="OFF", bg="#FD6A02", width=15, height=5, command=LightOFF)
-LightOFF.grid(row=0, column=0, padx=10, pady=3)
+LightOFF = Button(buttonFrame, text="OFF", bg="#FD6A02", pady=20, command=LightOFF)
+LightOFF.grid(row=0, column=0, padx=5, pady=3)
 
-THRO = Button(buttonFrame, text="Standing light", bg="#FD6A02", width=15, height=5, command=StandingLight)
-THRO.grid(row=0, column=1, padx=10, pady=3)
+THRO = Button(buttonFrame, text="Standing light", bg="#FD6A02",pady=20, command=StandingLight)
+THRO.grid(row=0, column=1, padx=5, pady=3)
 
-LightON = Button(buttonFrame, text="LIGHT", bg="#FD6A02", width=15, height=5, command=LightON)
-LightON.grid(row=0, column=2, padx=10, pady=3)
+LightON = Button(buttonFrame, text="LIGHT", bg="#FD6A02", pady=20, command=LightON)
+LightON.grid(row=0, column=2, padx=5, pady=3)
 
 Warning_Lights = Button(buttonFrame, image=WarnLight, bg="#FFF000", pady=20, command=WarningLight)
-Warning_Lights.grid(row=1, column=1, padx=10, pady=3)
+Warning_Lights.grid(row=1, column=1, padx=5, pady=3)
 
 Indicator_Left = Button(buttonFrame, image=IndLeft, text="Indicator Left", bg="#FFF000", pady=20, command=BlinkLeft)
-Indicator_Left.grid(row=2, column=0, padx=10, pady=3)
+Indicator_Left.grid(row=2, column=0, padx=5, pady=3)
 
 Indicators_OFF = Button(buttonFrame, text="Indicator OFF", bg="#FFFF00", pady=20, command=blinkOff)
-Indicators_OFF.grid(row=2, column=1, padx=10, pady=3)
+Indicators_OFF.grid(row=2, column=1, padx=5, pady=3)
 
 Indicator_Right = Button(buttonFrame, image=IndRight, text="Indicator Right", bg="#FFF000", pady=20, command=BlinkRight)
-Indicator_Right.grid(row=2, column=2, padx=10, pady=3)
+Indicator_Right.grid(row=2, column=2, padx=5, pady=3)
 
 HornButton = Button(buttonFrame, image=Horn, bg="#FFF000", pady=20)
-HornButton.grid(row=3, column=1, padx=10, pady=3)
+HornButton.grid(row=3, column=1, padx=5, pady=3)
 
 # Stairclimb Frame
 
