@@ -389,11 +389,11 @@ Slider.grid(row=2, column=0, padx=10, pady=3)
 menuFrame = Frame(leftFrame, bg="#000000")
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
-Dashboard = Button(menuFrame, text="Overview", bg="#FD6A02", width=15, height=5,
+Dashboard = Button(menuFrame, text="Overview", bg="#FD6A02", pady=20,
                    command=lambda: raise_frame(DashboardFrame)).pack()
 Label(menuFrame).pack()
 
-Lights = Button(menuFrame, text="Lights", bg="#FD6A02", width=15, height=5,
+Lights = Button(menuFrame, text="Lights", bg="#FD6A02", pady=30,
                 command=lambda: raise_frame(buttonFrame)).pack()
 Label(menuFrame).pack()
 
