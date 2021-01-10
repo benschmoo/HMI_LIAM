@@ -7,12 +7,16 @@ import bme280
 import threading
 from PIL import Image, ImageTk
 
+Sensor1 = 16
+Sensor2 = 18
+HornSignal = 31
+
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
-GPIO.setup(16, GPIO.IN,
+GPIO.setup(Sensor1, GPIO.IN,
            pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
-GPIO.setup(18, GPIO.IN,
+GPIO.setup(Sensor2, GPIO.IN,
            pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
-GPIO.setup(31, GPIO.OUT) # set a port/pin as an output
+GPIO.setup(HornSignal, GPIO.OUT) # set a port/pin as an output
 # I2c communication
 port = 1
 address = 0x76
@@ -46,13 +50,13 @@ global Chairstate
 # Logic for Chairstate
 def getChairstate():
     global Chairstate
-    if GPIO.input(16) == GPIO.HIGH:  # sensor1
-        if GPIO.input(18) == GPIO.LOW:
+    if GPIO.input(Sensor1) == GPIO.HIGH:  # sensor1
+        if GPIO.input(Sensor2) == GPIO.LOW:
             Chairstate = 1
             print(Chairstate)
             return Chairstate
-    elif GPIO.input(18) == GPIO.HIGH:  # sensor1
-        if GPIO.input(16) == GPIO.LOW:
+    elif GPIO.input(Sensor2) == GPIO.HIGH:  # sensor1
+        if GPIO.input(Sensor1) == GPIO.LOW:
             Chairstate = 0
             return Chairstate
     else:
@@ -86,9 +90,7 @@ Horn = ImageTk.PhotoImage(HornResize)
 WheelchairOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Wheelchair.jpg")
 WheelchairResize = WheelchairOrig.resize((400,400), Image.ANTIALIAS)
 Wheelchair = ImageTk.PhotoImage(WheelchairResize)
-# IndLeft1 = ImageTk.PhotoImage(IndLeft1)
-# imageEx = PhotoImage(file='200x200')
-# Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
+
 
 rightFrame = Frame(root, width=400, height=400, background="#000000")
 rightFrame.grid(row=0, column=1, padx=10, pady=3)
@@ -165,6 +167,7 @@ def StandingLight():
 def LightON():
     global Chairstate
     getChairstate()
+    LightON(bg="#000000")
     if Chairstate == 0:
         for i in range(0, 128):
             strip19.setPixelColorRGB(i, 255, 255, 255)
@@ -243,12 +246,12 @@ def BlinkLeft():
     time.sleep(0.1)
     switch = True
     while switch:
-        if Chairstate == 1:
+        if Chairstate == 0:
             for i in range(0, 128):
                 strip19.setPixelColorRGB(i, 255, 255, 255)
             for j in range(0, 128):
                 strip18.setPixelColorRGB(j, 0, 255, 0)
-        if Chairstate == 0:
+        if Chairstate == 1:
             for i in range(0, 128):
                 strip18.setPixelColorRGB(i, 255, 255, 255)
             for j in range(0, 128):
@@ -307,13 +310,12 @@ def WarningLight():
         if not switch:
             break
 
-        if Chairstate == 0:
-            for t in BlinkArray1:
-                strip18.setPixelColorRGB(t, 20, 60, 0)
-                strip19.setPixelColorRGB(t, 20, 60, 0)
-            for z in BlinkArray2:
-                strip18.setPixelColorRGB(z, 20, 60, 0)
-                strip19.setPixelColorRGB(z, 20, 60, 0)
+        for t in BlinkArray1:
+            strip18.setPixelColorRGB(t, 20, 60, 0)
+            strip19.setPixelColorRGB(t, 20, 60, 0)
+        for z in BlinkArray2:
+            strip18.setPixelColorRGB(z, 20, 60, 0)
+            strip19.setPixelColorRGB(z, 20, 60, 0)
         strip18.setBrightness(50)
         strip19.setBrightness(50)
         strip18.show()
