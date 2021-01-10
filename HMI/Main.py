@@ -81,10 +81,10 @@ Horn = PhotoImage(file="/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Horn.png")
 rightFrame = Frame(root, width=400, height=400, background="#000000")
 rightFrame.grid(row=0, column=1, padx=10, pady=3)
 
-buttonFrame = Frame(rightFrame)
-DashboardFrame = Frame(rightFrame)
-StairClimbFrame = Frame(rightFrame)
-SensorsFrame = Frame(rightFrame)
+buttonFrame = Frame(rightFrame, bg="#000000")
+DashboardFrame = Frame(rightFrame, bg="#000000")
+StairClimbFrame = Frame(rightFrame, bg="#000000")
+SensorsFrame = Frame(rightFrame, bg="#000000")
 
 for frame in (buttonFrame, DashboardFrame, StairClimbFrame, SensorsFrame):
     frame.grid(row=1, column=0, padx=10, pady=3)
@@ -378,7 +378,7 @@ Slider.grid(row=2, column=0, padx=10, pady=3)
 
 # Menubuttons
 
-menuFrame = Frame(leftFrame)
+menuFrame = Frame(leftFrame, bg="#000000")
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
 Dashboard = Button(menuFrame, text="Overview", bg="#FD6A02", width=15, height=5,
