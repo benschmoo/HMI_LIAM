@@ -83,8 +83,8 @@ HornOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Horn.png")
 HornResize = HornOrig.resize((130,70), Image.ANTIALIAS)
 Horn = ImageTk.PhotoImage(HornResize)
 
-WheelchairOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Wheelchair.png")
-WheelchairResize = WheelchairOrig.resize((500,500), Image.ANTIALIAS)
+WheelchairOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Wheelchair.jpg")
+WheelchairResize = WheelchairOrig.resize((400,400), Image.ANTIALIAS)
 Wheelchair = ImageTk.PhotoImage(WheelchairResize)
 # IndLeft1 = ImageTk.PhotoImage(IndLeft1)
 # imageEx = PhotoImage(file='200x200')
@@ -359,11 +359,11 @@ def stop_Horn(event):
 
 temp = str(data.temperature)
 # Dashboard Frame
-WheelChairIMG = Image(DashboardFrame, image=Wheelchair, bg="#FFFFFF", width=15, height=10)
+WheelChairIMG = Label(DashboardFrame, image=Wheelchair, bg="#FFFFFF", pady=20)
 WheelChairIMG.grid(row=0, column=0, padx=10, pady=3)
 
 Temperature = Label(DashboardFrame, text="Temperature: %.2f °C" % data.temperature, bg="#FFFF00")
-Temperature.grid(row=0, column=1, padx=10, pady=3)
+Temperature.grid(row=0, column=0, padx=10, pady=3)
 
 # Light Buttons/Frame
 # buttonFrame = Frame(rightFrame)
