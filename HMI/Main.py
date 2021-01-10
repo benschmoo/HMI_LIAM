@@ -5,7 +5,7 @@ import time
 import smbus2
 import bme280
 import threading
-from PIL import Image
+from PIL import Image, ImageTk
 
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 GPIO.setup(16, GPIO.IN,
@@ -72,8 +72,9 @@ leftFrame.grid(row=0, column=0, padx=10, pady=3)
 IndLeft = PhotoImage(file=r"/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndLeft.png")
 IndRight = PhotoImage(file="/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndRight.png")
 WarnLight = PhotoImage(file="/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Warnblinker.png")
-Horn1 = PhotoImage(file="/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Horn.png")
-Horn = Horn1.zoom(50, 50)
+Horn1 = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Horn.png")
+Horn2 = Horn1.resize((20,20), Image.ANTIALIAS)
+Horn = ImageTk.PhotoImage(Horn2)
 # IndLeft1 = ImageTk.PhotoImage(IndLeft1)
 # imageEx = PhotoImage(file='200x200')
 # Label(leftFrame, image=imageEx).grid(row=2, column=0, padx=10, pady=3)
