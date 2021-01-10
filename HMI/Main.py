@@ -71,16 +71,16 @@ leftFrame.grid(row=0, column=0, padx=10, pady=3)
 
 # Image import and resize using PIL
 IndLeftOrig = Image.open(r"/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndLeft.png")
-IndLeftResize = IndLeftOrig.resize((80,50), Image.ANTIALIAS)
+IndLeftResize = IndLeftOrig.resize((140,90), Image.ANTIALIAS)
 IndLeft = ImageTk.PhotoImage(IndLeftResize)
 IndRightOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/IndRight.png")
-IndRightResize = IndRightOrig.resize((80,50), Image.ANTIALIAS)
+IndRightResize = IndRightOrig.resize((140,90), Image.ANTIALIAS)
 IndRight = ImageTk.PhotoImage(IndRightResize)
 WarnLightOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Warnblinker.png")
-WarnLightResize = WarnLightOrig.resize((90,80), Image.ANTIALIAS)
+WarnLightResize = WarnLightOrig.resize((100,90), Image.ANTIALIAS)
 WarnLight = ImageTk.PhotoImage(WarnLightResize)
 HornOrig = Image.open("/home/pi/repos/HMI_LIAM/HMI/venv/Pictures/Horn.png")
-HornResize = HornOrig.resize((80,50), Image.ANTIALIAS)
+HornResize = HornOrig.resize((130,70), Image.ANTIALIAS)
 Horn = ImageTk.PhotoImage(HornResize)
 # IndLeft1 = ImageTk.PhotoImage(IndLeft1)
 # imageEx = PhotoImage(file='200x200')
@@ -389,19 +389,19 @@ Slider.grid(row=2, column=0, padx=10, pady=3)
 menuFrame = Frame(leftFrame, bg="#000000")
 menuFrame.grid(row=1, column=0, padx=10, pady=3)
 
-Dashboard = Button(menuFrame, text="Overview", bg="#FD6A02", pady=20, padx=50,
+Dashboard = Button(menuFrame, text="Overview", bg="#FD6A02", width=20, height=3,
                    command=lambda: raise_frame(DashboardFrame)).pack()
 Label(menuFrame).pack()
 
-Lights = Button(menuFrame, text="Lights", bg="#FD6A02", pady=20, padx=50,
+Lights = Button(menuFrame, text="Lights", bg="#FD6A02", width=20, height=3,
                 command=lambda: raise_frame(buttonFrame)).pack()
 Label(menuFrame).pack()
 
-StairClimber = Button(menuFrame, text="Stairclimber", bg="#FD6A02", pady=20, padx=50,
+StairClimber = Button(menuFrame, text="Stairclimber", bg="#FD6A02", width=20, height=3,
                       command=lambda: raise_frame(StairClimbFrame)).pack()
 Label(menuFrame).pack()
 
-Sensors = Button(menuFrame, text="Sensors", bg="#FD6A02", pady=20, padx=50,
+Sensors = Button(menuFrame, text="Sensors", bg="#FD6A02", width=20, height=3,
                  command=lambda: raise_frame(SensorsFrame)).pack()
 Label(menuFrame).pack()
 
