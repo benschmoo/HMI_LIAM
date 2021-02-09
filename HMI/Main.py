@@ -10,9 +10,9 @@ from PIL import Image, ImageTk
 Sensor1 = 16
 Sensor2 = 18
 HornSignal = 31
-Red = 23
-Green = 24
-Blue = 25
+Red = 09
+Green = 10
+Blue = 11
 
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 GPIO.setup(Sensor1, GPIO.IN,
@@ -470,7 +470,7 @@ HornButton.bind('<ButtonPress-1>',start_Horn)
 HornButton.bind('<ButtonRelease-1>',stop_Horn)
 
 Underfloor = Button(buttonFrame, text="Underfloor", bg="#FD6A02", pady=30, padx=60, command=UnderfloorLight)
-Underfloor.grid(row=3, column=2, padx=5, pady=3)
+Underfloor.grid(row=4, column=2, padx=5, pady=3)
 
 # Stairclimb Frame --> just an idea actually, has to improved in further developments,
 
