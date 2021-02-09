@@ -10,6 +10,9 @@ from PIL import Image, ImageTk
 Sensor1 = 16
 Sensor2 = 18
 HornSignal = 31
+Red = 23
+Green = 24
+Blue = 25
 
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
 GPIO.setup(Sensor1, GPIO.IN,
@@ -17,6 +20,10 @@ GPIO.setup(Sensor1, GPIO.IN,
 GPIO.setup(Sensor2, GPIO.IN,
            pull_up_down=GPIO.PUD_DOWN)  # Set pin 10 to be an input pin and set initial value to be pulled low (off)
 GPIO.setup(HornSignal, GPIO.OUT) # set a port/pin as an output
+GPIO.setup(Red, GPIO.OUT) # set a port/pin as an output
+GPIO.setup(Green, GPIO.OUT) # set a port/pin as an output
+GPIO.setup(Blue, GPIO.OUT) # set a port/pin as an output
+
 # I2c communication
 port = 1
 address = 0x76
@@ -49,18 +56,18 @@ global Chairstate
 
 # Logic for Chairstate
 def getChairstate():
-    global Chairstate
-    if GPIO.input(Sensor1) == GPIO.HIGH:  # sensor1
+    global Chairstate                     # defining global variable for usage in all functions
+    if GPIO.input(Sensor1) == GPIO.HIGH:  # only sensor1 connected to GPIO 16 is HIGH
         if GPIO.input(Sensor2) == GPIO.LOW:
             Chairstate = 1
             print(Chairstate)
             return Chairstate
-    elif GPIO.input(Sensor2) == GPIO.HIGH:  # sensor1
+    elif GPIO.input(Sensor2) == GPIO.HIGH:  # only sensor2 connected to GPIO 18 is HIGH
         if GPIO.input(Sensor1) == GPIO.LOW:
             Chairstate = 0
             return Chairstate
     else:
-        ERROR()
+        ERROR()                             # if both GPIO are HIGH or LOW --> Error --> WarningLight
         print("IOError")
 
 
@@ -92,6 +99,7 @@ WheelchairResize = WheelchairOrig.resize((400,400), Image.ANTIALIAS)
 Wheelchair = ImageTk.PhotoImage(WheelchairResize)
 
 
+#defining of frames for the right side of the HMI layout
 rightFrame = Frame(root, width=400, height=400, background="#000000")
 rightFrame.grid(row=0, column=1, padx=10, pady=3)
 
@@ -113,7 +121,7 @@ def raise_frame(frame):
     frame.grid()
     frame.tkraise()
 
-
+# functions for the light options and the horn following
 def LightOFF():
     global switch
     switch = False
@@ -172,23 +180,23 @@ def StandingLight():
 
 def LightON():
     global Chairstate
-    getChairstate()
-    LightOFF.configure(bg="#FD6A02")
-    LightON.configure(bg="yellow")
-    THRO.configure(bg="#FD6A02")
-    if Chairstate == 0:
-        for i in range(0, 128):
-            strip19.setPixelColorRGB(i, 255, 255, 255)
-        for j in range(0, 128):
-            strip18.setPixelColorRGB(j, 0, 255, 0)
+    getChairstate()     # get current chairstate
+    LightOFF.configure(bg="#FD6A02")    # lowlight "OFF" button
+    LightON.configure(bg="yellow")      # highligt "ON" button
+    THRO.configure(bg="#FD6A02")        # lowlight "Stand" button
+    if Chairstate == 0:             # ask chairstate
+        for i in range(0, 128):     # LED range first led matrix
+            strip19.setPixelColorRGB(i, 255, 255, 255)      # set color white
+        for j in range(0, 128):     # LED range second LED matrix
+            strip18.setPixelColorRGB(j, 0, 255, 0)      # set color red
     if Chairstate == 1:
         for i in range(0, 128):
             strip18.setPixelColorRGB(i, 255, 255, 255)
         for j in range(0, 128):
             strip19.setPixelColorRGB(j, 0, 255, 0)
-    strip18.setBrightness(50)
+    strip18.setBrightness(50)       # set brightness LED matrix
     strip19.setBrightness(50)
-    strip18.show()
+    strip18.show()                  # show new config
     strip19.show()
 
 
@@ -330,6 +338,56 @@ def WarningLight():
         strip19.show()
         time.sleep(0.6)
 
+# following 2 functions need connection and data with/of SPS
+def ReverseLight():
+    global Chairstate
+    getChairstate()     # get current chairstate
+    LightOFF.configure(bg="#FD6A02")    # lowlight "OFF" button
+    LightON.configure(bg="yellow")      # highligt "ON" button
+    THRO.configure(bg="#FD6A02")        # lowlight "Stand" button
+    if Chairstate == 0:             # ask chairstate
+        for i in range(0, 128):     # LED range first led matrix
+            strip19.setPixelColorRGB(i, 255, 255, 255)      # set color white
+        for j in range(0, 63):     # LED range second LED matrix
+            strip18.setPixelColorRGB(j, 0, 255, 0)      # set color red
+        for k in range(64, 128):     # LED range second LED matrix
+            strip18.setPixelColorRGB(j, 255, 255, 255)      # set color white one panel --> reverse light
+    if Chairstate == 1:
+        for i in range(0, 128):
+            strip18.setPixelColorRGB(i, 255, 255, 255)
+        for j in range(0, 63):
+            strip19.setPixelColorRGB(j, 0, 255, 0)
+        for k in range(64, 128):     # LED range second LED matrix
+            strip18.setPixelColorRGB(j, 255, 255, 255)      # set color white one panel --> reverse light
+    strip18.setBrightness(50)       # set brightness LED matrix
+    strip19.setBrightness(50)
+    strip18.show()                  # show new config
+    strip19.show()
+
+
+def BreakingLight():
+    global Chairstate
+    getChairstate()     # get current chairstate
+    LightOFF.configure(bg="#FD6A02")    # lowlight "OFF" button
+    LightON.configure(bg="yellow")      # highligt "ON" button
+    THRO.configure(bg="#FD6A02")        # lowlight "Stand" button
+    if Chairstate == 0:             # ask chairstate
+        for i in range(0, 128):     # LED range first led matrix
+            strip19.setPixelColorRGB(i, 255, 255, 255)      # set color white
+            strip19.setBrightness(50)   # brightness normal
+        for j in range(0, 128):     # LED range second LED matrix
+            strip18.setPixelColorRGB(j, 0, 255, 0)      # set color red
+            strip18.setBrightness(80)   # higher brightness breaking light
+    if Chairstate == 1:
+        for i in range(0, 128):
+            strip18.setPixelColorRGB(i, 255, 255, 255)
+            strip18.setBrightness(50)   # brightness normal
+        for j in range(0, 128):
+            strip19.setPixelColorRGB(j, 0, 255, 0)
+            strip19.setBrightness(80)   # higher brightness breaking light
+    strip18.show()                  # show new config
+    strip19.show()
+
 def ERROR():
     getChairstate()
     global switch
@@ -366,15 +424,21 @@ def stop_Horn(event):
     print("stopping motor...")
     beeping = False
 
+def UnderfloorLight():
+    GPIO.output(Red,1)
+    GPIO.output(Green,1)
+    GPIO.output(Blue,1)
+
 
 temp = str(data.temperature)
 
-# Dashboard Frame
+# Dashboard Frame --> just picture and temp/humidity/hight is mentioned
 WheelChairIMG = Label(DashboardFrame, image=Wheelchair, bg="#FFFFFF", pady=20)
 WheelChairIMG.grid(row=0, column=0, padx=10, pady=3)
 
 Temperature = Label(DashboardFrame, text="Temperature: %.2f °C" % data.temperature, bg="#FFFF00")
 Temperature.grid(row=0, column=0, padx=10, pady=3)
+
 # Light Buttons/Frame
 # buttonFrame = Frame(rightFrame)
 # buttonFrame.grid(row=1, column=0, padx=10, pady=3)
@@ -404,7 +468,11 @@ HornButton = Button(buttonFrame, image=Horn, bg="#FFF000", pady=30, padx=60)
 HornButton.grid(row=3, column=1, padx=5, pady=3)
 HornButton.bind('<ButtonPress-1>',start_Horn)
 HornButton.bind('<ButtonRelease-1>',stop_Horn)
-# Stairclimb Frame
+
+Underfloor = Button(buttonFrame, text="Underfloor", bg="#FD6A02", pady=30, padx=60, command=UnderfloorLight)
+Underfloor.grid(row=3, column=2, padx=5, pady=3)
+
+# Stairclimb Frame --> just an idea actually, has to improved in further developments,
 
 moveOut = Button(StairClimbFrame, text="MOVE OUT", bg="#FD6A02", pady=60, padx=60)
 moveOut.grid(row=0, column=0, padx=10, pady=5)
@@ -422,6 +490,8 @@ Slider = Scale(StairClimbFrame, from_=0, to=100, resolution=0.1, orient=HORIZONT
 Slider.grid(row=2, column=0, padx=10, pady=3)
 
 # Sensors Frame
+# nothing here right now....
+
 
 # Menubuttons
 
@@ -444,5 +514,5 @@ Sensors = Button(menuFrame, text="Sensors", bg="#FD6A02", width=20, height=3,
                  command=lambda: raise_frame(SensorsFrame)).pack()
 Label(menuFrame).pack()
 
-raise_frame(DashboardFrame)
+raise_frame(DashboardFrame) # initial frame after startup
 root.mainloop()  # GUI wird upgedatet. Danach keine Elemente setzen
