@@ -416,12 +416,12 @@ def start_Horn(event):
     global beeping
     beeping = True
     GPIO.output(31,1)
-    print("starting motor...")
+    print("starting horn...")
 
 def stop_Horn(event):
     global beeping
     GPIO.output(31,0)
-    print("stopping motor...")
+    print("stopping horn...")
     beeping = False
 
 def UnderfloorLight():
