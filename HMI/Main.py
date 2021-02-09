@@ -484,7 +484,7 @@ moveIn = Button(StairClimbFrame, text="MOVE IN", bg="#FD6A02", pady=60, padx=60)
 moveIn.grid(row=2, column=0, padx=10, pady=5)
 
 downStairs = Button(StairClimbFrame, text="UPSTAIRS", bg="#FD6A02",pady=60, padx=60)
-downStairs.grid(row=, column=1, padx=10, pady=5)
+downStairs.grid(row=2, column=1, padx=10, pady=5)
 
 Slider = Scale(StairClimbFrame, from_=0, to=100, resolution=0.1, orient=HORIZONTAL, length=400)
 Slider.grid(row=2, column=0, padx=10, pady=3)
